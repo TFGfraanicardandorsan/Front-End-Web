@@ -4,30 +4,41 @@ import { Heading, FormControl, FormLabel, Input, Box,
 import { useNavigate } from 'react-router-dom'
 import { IoEyeSharp } from 'react-icons/io5'
 import { FaEyeSlash } from 'react-icons/fa'
+import useUser from '../hooks/useUser'
+import { useEffect } from 'react'
 
 export function Login() {
 
     const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
     const [show, setShow] = useState('');
-    const handleClick = () => setShow (!show)
-    const [password, setPassword] = useState('')
+    const handleClick = () => setShow (!show);
     const navigate = useNavigate();
+    
+    const{login, isLogged} = useUser()
+
+    useEffect(() => {
+        if (isLogged) navigate('/')
+    }, [isLogged, navigate])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const login = { username, password };
+        login({username,password})
+    //     const login = { username, password };
 
-        fetch('http://localhost:8080/users/login', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(login)
-        }).then(() => {
-            console.log('Se ha conectado');
-            alert("Ha accedido correctamente")
-        })
-         console.log(login)
-        //navigate('/')
-    };
+    //     fetch('https://t-planifica.herokuapp.com/authenticate', {
+    //         method: 'POST',
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(login)
+    //     }).then(() => {
+    //         console.log('Se ha conectado');
+    //         alert("Ha accedido correctamente")
+    //     })
+    //      console.log(login)
+        // navigate('/')   //PARA IR AL INICIO DE LA APLICACIÓN
+    // };
+    }
 
     return (
         <>
