@@ -7,7 +7,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md'
 import { Avatar, AvatarBadge, AvatarGroup, Box, Text } from '@chakra-ui/react';
 import { Cart, Chat, Notification, UserProfile } from '.';
 import { useStateContext } from "../contents/ContextProvider";
-import * as API from "../services/tareas";
+import * as APP from "../services/usuarios";
 
 
 
@@ -40,9 +40,9 @@ const Navbar = () => {
     }, [screenSize]);
 
 
-    const [tareas, setTareas] = useState([]);
+    const [usuarios, setUsuarios] = useState([]);
     useEffect(() => {
-        API.getAllTareas().then(setTareas);
+        APP.getMisDatos().then(setUsuarios);
     }, []);
 
     return (
@@ -61,12 +61,12 @@ const Navbar = () => {
 
                 <div className="flex items-center gap-2 cursor-pointer p-1" onClick={() => handleClick('userProfile')}>
                     <span>
-                        {tareas.map((tarea) => (
-                            <text key={tarea.id}>
-                                <Avatar name='' bg="transparent" src={tarea.descripcion} size='lg' top={1} mr={1} />
-                                <span className="text-black-400 font-bold text-16 align-bottom" >Hola, {tarea.nombre}</span>
-                            </text>
-                        ))}
+                        {/* {usuarios.map((usuario) => ( */}
+                            {/* <text key={usuario.id}> */}
+                                {/* <Avatar name='' bg="transparent" src={tarea.descripcion} size='lg' top={1} mr={1} /> */}
+                                {/* <span className="text-black-400 font-bold text-16 align-bottom" >Hola, {usuario.username}</span> */}
+                            {/* </text> */}
+                        {/* ))} */}
                     </span>
                     <MdKeyboardArrowDown />
                 </div>

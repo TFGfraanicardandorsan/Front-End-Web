@@ -19,7 +19,7 @@ export function CrearTarea() {
         e.preventDefault();
         const tarea = { nombre, descripcion, fechaInicio, fechaFin, duracion, priorizacion, terminada };
 
-        fetch('https://t-organize.herokuapp.com/nuevaTarea', {
+        fetch('https://t-planifica.herokuapp.com/nuevaTarea', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(tarea)

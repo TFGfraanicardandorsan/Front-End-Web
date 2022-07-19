@@ -13,7 +13,7 @@ export function Tareas() {
   }, []);
 
     function borrarTarea(id){
-      fetch (`https://t-organize.herokuapp.com/borrarTarea/`+ id,{
+      fetch (`https://t-planifica.herokuapp.com/borrarTarea/`+ id,{
       method: 'DELETE',
       headers: { "Content-Type": "application/json" }
     }).then(() => {
@@ -23,7 +23,7 @@ export function Tareas() {
   }
 
   async function getData() {
-    let result = await fetch ("https://t-organize.herokuapp.com/tareas");
+    let result = await fetch ("https://t-planifica.herokuapp.com/tareas");
     result= await result.json();
     setTareas(result);
   }
