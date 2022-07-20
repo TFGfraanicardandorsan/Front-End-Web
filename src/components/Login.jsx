@@ -15,8 +15,7 @@ export function Login() {
     const [show, setShow] = useState('');
     const handleClick = () => setShow (!show);
     const navigate = useNavigate();
-    
-    const{login, isLogged} = useUser()
+    const {isLoginLoading, hasLoginError, login, isLogged} = useUser();
 
     useEffect(() => {
         if (isLogged) navigate('/')
@@ -25,19 +24,6 @@ export function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         login({username,password})
-    //     const login = { username, password };
-
-    //     fetch('https://t-planifica.herokuapp.com/authenticate', {
-    //         method: 'POST',
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify(login)
-    //     }).then(() => {
-    //         console.log('Se ha conectado');
-    //         alert("Ha accedido correctamente")
-    //     })
-    //      console.log(login)
-        // navigate('/')   //PARA IR AL INICIO DE LA APLICACIÓN
-    // };
     }
 
     return (
