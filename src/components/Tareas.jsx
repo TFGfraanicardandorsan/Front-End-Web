@@ -13,17 +13,18 @@ export function Tareas() {
   }, []);
 
     function borrarTarea(id){
-      fetch (`http://localhost:8080/borrarTarea/`+ id,{
+      fetch ('http://localhost:8080/borrarTarea/'+ id,{
       method: 'DELETE',
-      headers: { "Content-Type": "application/json" }
-    }).then(() => {
+      headers: { "Content-Type": "application/json",
+      // "Authorization": `Bearer ${token}` }
+    }}).then(() => {
       console.log('Borrar tarea');
       getData();
   })
   }
 
   async function getData() {
-    let result = await fetch ("http://localhost:8080/tareas");
+    let result = await fetch ('http://localhost:8080/tareas');
     result= await result.json();
     setTareas(result);
   }
@@ -50,8 +51,8 @@ export function Tareas() {
                 <br></br>
               </Text>
               <Spacer />
-              <Tag p={4} colorScheme={tarea.terminada ? "green" : "red"} >
-                {tarea.terminada ? "Finalizada" : "Sin Finalizar "}
+              <Tag p={4} colorScheme= "green" >
+                {tarea.estado}
               </Tag>
 
             </Flex>

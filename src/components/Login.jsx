@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
-import {
-    Heading, FormControl, FormLabel, Input, Box,
-    Button, InputGroup, InputRightElement
-} from '@chakra-ui/react'
+import React, { useState, useEffect } from 'react'
+import { Heading, FormControl, FormLabel, Input, Box, Button, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { IoEyeSharp } from 'react-icons/io5'
 import { FaEyeSlash } from 'react-icons/fa'
 import useUser from '../hooks/useUser'
-import { useEffect } from 'react'
 
 export function Login() {
 
@@ -73,9 +69,6 @@ export function Login() {
                     hasLoginError && <strong>Las credenciales son inválidas</strong>
                 }
             </Box>
-
-
-
         </>
     )
 }
