@@ -1,4 +1,4 @@
-const API_URL="https://t-planifica.herokuapp.com";
+const API_URL="http://localhost:8080";
 
 export async function getMisDatos() {
     try{

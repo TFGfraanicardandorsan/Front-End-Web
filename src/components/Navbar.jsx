@@ -40,10 +40,10 @@ const Navbar = () => {
     }, [screenSize]);
 
 
-    const [usuarios, setUsuarios] = useState([]);
-    useEffect(() => {
-        APP.getMisDatos().then(setUsuarios);
-    }, []);
+    // const [usuarios, setUsuarios] = useState([]);
+    // useEffect(() => {
+    //     APP.getMisDatos().then(setUsuarios);
+    // }, []);
 
     return (
         <div className="flex justify-between p-2 md:mx-6 relative">
@@ -62,11 +62,11 @@ const Navbar = () => {
                 <div className="flex items-center gap-2 cursor-pointer p-1" onClick={() => handleClick('userProfile')}>
                     <span>
                         {/* {usuarios.map((usuario) => ( */}
-                            {/* <text key={usuario.id}> */}
+                             {/* <text key={usuario.id}>  */}
                                 {/* <Avatar name='' bg="transparent" src={tarea.descripcion} size='lg' top={1} mr={1} /> */}
-                                {/* <span className="text-black-400 font-bold text-16 align-bottom" >Hola, {usuario.username}</span> */}
-                            {/* </text> */}
-                        {/* ))} */}
+                                 {/* <span className="text-black-400 font-bold text-16 align-bottom" >Hola, {usuario.username}</span>  */}
+                             {/* </text>  */}
+                         {/* ))}  */}
                     </span>
                     <MdKeyboardArrowDown />
                 </div>

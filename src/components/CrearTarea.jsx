@@ -17,9 +17,9 @@ export function CrearTarea() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const tarea = { nombre, descripcion, fechaInicio, fechaFin, duracion, priorizacion, terminada };
+        const tarea = { nombre };
 
-        fetch('https://t-planifica.herokuapp.com/nuevaTarea', {
+        fetch('http://localhost:8080/nuevaTarea', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(tarea)
@@ -43,72 +43,6 @@ export function CrearTarea() {
                         />
                     </FormControl>
                     <br></br>
-                    <FormControl isRequired >
-                        <FormLabel> Descripción </FormLabel>
-                        <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' placeholder='Descripción' bg='yellow.200'
-                            type="text"
-                            value={descripcion}
-                            onChange={(e) => setDescripcion(e.target.value)}
-                        />
-                    </FormControl>
-                    <br></br>
-                    <FormControl isRequired >
-                        <FormLabel> Fecha Inicio </FormLabel>
-                        <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
-                            type="date"
-                            value={fechaInicio}
-                            onChange={(fecha) => setFechaInicio(fecha.target.value)}
-                        />
-                    </FormControl>
-                    <br></br>
-                    <FormControl isRequired >
-                        <FormLabel> Fecha Fin </FormLabel>
-                        <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
-                            type="date"
-                            value={fechaFin}
-                            onChange={(fecha) => setFechaFin(fecha.target.value)}
-                        />
-                    </FormControl>
-                    <br></br>
-                    <FormControl isRequired >
-                        <FormLabel> Duración </FormLabel>
-                        <NumberInput maxW='100px' min={1} max={100} mr='2rem' borderColor='black' focusBorderColor='black' bg='yellow.200'
-                            value={duracion} onChange={(duracion) => setDuracion(duracion)}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
-                        <Slider
-                            min={1} max={100}
-                            flex='1'
-                            focusThumbOnChange={false}
-                            value={duracion}
-                            onChange={(duracion) => setDuracion(duracion)}
-                        >
-                            <SliderTrack >
-                                <SliderFilledTrack bg='black' />
-                            </SliderTrack>
-                            <SliderThumb fontSize='sm' boxSize='36px' children={duracion} />
-                        </Slider>
-                    </FormControl>
-                    <br></br>
-                    <FormControl isRequired >
-                        <FormLabel> Priorización </FormLabel>
-                        <Select placeholder='Selecciona una opción' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
-                            onChange={(e) => setPriorizacion(e.target.value)} >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </Select>
-                    </FormControl>
-                    <br></br>
-                    <FormControl isRequired >
-                        <FormLabel> Terminada </FormLabel>
-                        <Switch onChange={(e) => setTerminada(e.target.checked)} colorScheme='yellow' />
-                    </FormControl>
-                    <br /> <br />
                     <button>
                         <Button colorScheme='black' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>
                             Crear Tarea
