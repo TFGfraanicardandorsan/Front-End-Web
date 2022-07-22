@@ -8,6 +8,9 @@ import { Navbar, Footer, Sidebar, Inicio } from './components';
 import { UserContextProvider } from './contents/UserContext';
 import { useStateContext } from './contents/ContextProvider';
 import { Login } from './components/Login';
+import { Equipos } from './components/Equipos';
+import { CrearEquipo } from './components/CrearEquipo';
+import { MisEquipos } from './components/MisEquipos';
 
 export function App() {
   const { activeMenu } = useStateContext();
@@ -51,8 +54,9 @@ export function App() {
                 <Route path="/nuevaTarea" element={<CrearTarea />} />
 
                 {/* Equipos */}
-                <Route path="/equipos" element="Equipos" />
-                <Route path="/miequipo" element="Miequipo" />
+                <Route path="/equipos" element={<Equipos />} />
+                <Route path="/misEquipos" element={<MisEquipos />} />
+                <Route path="/nuevoEquipo" element={<CrearEquipo />} />
               </Routes>
             </div>
           </div>

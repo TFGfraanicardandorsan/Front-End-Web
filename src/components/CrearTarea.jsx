@@ -21,7 +21,7 @@ export function CrearTarea() {
 
         const jwt = window.sessionStorage.getItem('jwt');
         const tarea = { nombre, descripcion, fechaInicio, fechaFin, duracion, priorizacion, estado };
-        fetch('http://localhost:8080/nuevaTarea', {
+        fetch('https://t-planifica.herokuapp.com/nuevaTarea', {
             method: 'POST',
             headers: { "Content-Type": "application/json",
             "Authorization": `Bearer ${jwt}`},
@@ -118,11 +118,6 @@ export function CrearTarea() {
                             <option>5</option>
                             <option>6</option>
                         </Select>
-                    </FormControl>
-                    <br></br>
-                    <FormControl isRequired >
-                        <FormLabel> Terminada </FormLabel>
-                        <Switch onChange={(e) => setTerminada(e.target.checked)} colorScheme='yellow' />
                     </FormControl>
                     <br /> <br />
                     <button>

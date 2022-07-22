@@ -96,7 +96,7 @@ const Sidebar = () => {
                         <Flex align='center' fontSize={15}>
                             <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1} >
                                 <AiOutlineTeam />
-                                <Link to="/tareas">
+                                <Link to="/equipos">
                                     <Text fontSize="xl" ml={2} mr={3}>
                                         <strong>Equipos</strong>
                                     </Text>
@@ -107,13 +107,27 @@ const Sidebar = () => {
                         <Flex align='center' fontSize={15}>
                             <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}>
                                 <RiTeamLine />
-                                <Link to="/mistareas">
+                                <Link to="/misEquipos">
                                     <Text fontSize="xl" ml={2} mr={3}>
                                         <strong>Mis Equipos</strong>
                                     </Text>
                                 </Link>
                             </Button>
                         </Flex>
+                        <Flex align='center' fontSize={15}>
+                            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}>
+                                <GoTasklist />
+                                <Link to="/nuevoEquipo">
+                                    <Text fontSize="xl" ml={2} mr={3}>
+                                        <strong>Crear Equipos</strong>
+                                    </Text>
+                                </Link>
+                            </Button>
+                        </Flex>
+                        </Box>
+                        <Box bg='white' w='95%' p={1} color='black'>
+                        </Box>
+                        <Box bg='yellow.200' w='95%' p={1} color='black' borderRadius={20}>
                         <Flex align='center' fontSize={15}>
                             <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}>
                                 <RiTeamLine />

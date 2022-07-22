@@ -1,4 +1,4 @@
-const ENDPOINT = 'http://localhost:8080'
+const ENDPOINT = 'https://t-planifica.herokuapp.com'
 
 export default function login ({ username, password }) {
     return fetch (`${ENDPOINT}/authenticate`,{
