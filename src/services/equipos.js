@@ -1,21 +1,30 @@
-const API_URL="https://t-planifica.herokuapp.com";
+const API_URL = "https://t-planifica.herokuapp.com";
 
 export async function getAllEquipos() {
-    try{
-    const response = await fetch (`${API_URL}/equipos`);
-    const data = await response.json();
-    return data;
-    } catch (error){
+    try {
+        const response = await fetch(`${API_URL}/equipos`);
+        return await response.json();
+    } catch (error) {
         console.error(error);
     }
 }
 
 export async function getMisEquipos() {
-    try{
-    const response = await fetch (`${API_URL}/misEquipos`,
-    {credentials :'include'});
-    const data = await response.json();
-    return data;
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+        "Authorization": `Bearer ${jwt}`});
+
+    const myInit = {
+        method: 'GET',
+        headers: myHeader,
+        mode: 'cors',  
+        cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/misEquipos`, myInit);
+    try {
+        const response = await fetch(myRequest)
+        return await response.json();
     } catch (error){
         console.error(error);
     }

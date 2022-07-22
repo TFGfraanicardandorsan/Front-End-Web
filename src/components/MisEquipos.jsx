@@ -13,7 +13,7 @@ export function MisEquipos() {
   return (
     <>
       <Heading align="center" as="h1" size="2xl" m={4} >
-        Equipos
+        Mis Equipos
       </Heading>
       <section>
         {equipos.map((equipo) => (

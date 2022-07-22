@@ -10,20 +10,24 @@ export async function getAllTareas() {
     }
 }
 
-// const ENDPOINT = 'http://localhost:8080'
+export async function getMisTareasCreadas() {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+        "Authorization": `Bearer ${jwt}`
+    });
 
-// export default function crearTarea ({ id, jwt }) {
-//     return fetch (`${ENDPOINT}/nuevaTarea`,{
-//       method: 'POST',
-//       headers: {
-//         "Content-Type" : "application/json"
-//       },
-//       body: JSON.stringify({jwt})  
-//     }).then(res => {
-//         if(!res.ok) throw new Error ('Response is Not ok')
-//         return res.json()
-//     }).then(res=> {
-//         const { nombre } = res
-//         return nombre
-//     })
-// }
+    const myInit = {
+        method: 'GET',
+        headers: myHeader,
+        mode: 'cors',  
+        cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/misTareasCreadas`, myInit);
+    try {
+        const response = await fetch(myRequest)
+        return await response.json();
+    } catch (error){
+        console.error(error);
+    }
+}
