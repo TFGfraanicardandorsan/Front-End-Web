@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineMenu } from 'react-icons/ai';
 import { BsChatLeft } from 'react-icons/bs';
 import { RiNotification3Line } from 'react-icons/ri';
-import { FiShoppingCart } from 'react-icons/fi';
 import { MdKeyboardArrowDown } from 'react-icons/md'
-import { Avatar, AvatarBadge, AvatarGroup, Box, Text } from '@chakra-ui/react';
-import { Cart, Chat, Notification, UserProfile } from '.';
+import { Avatar, AvatarBadge, Box, Stack } from '@chakra-ui/react';
+import { Chat, Notification, UserProfile } from '.';
 import { useStateContext } from "../contents/ContextProvider";
-import * as APP from "../services/usuarios";
+import * as API from "../services/usuarios";
 
 
 
@@ -40,19 +39,17 @@ const Navbar = () => {
     }, [screenSize]);
 
 
-    // const [usuarios, setUsuarios] = useState([]);
-    // useEffect(() => {
-    //     APP.getMisDatos().then(setUsuarios);
-    // }, []);
+    const [usuarios, setUsuarios] = useState([]);
+
+    useEffect(() => {
+        API.getMisDatos().then(setUsuarios);
+    }, []);
 
     return (
         <div className="flex justify-between p-2 md:mx-6 relative">
             <NavButton title="Menu" customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} color="black" icon={<AiOutlineMenu />} />
 
             <div className="flex">
-                <NavButton title="Cart" dotColor="yellow" customFunc={() => handleClick('cart')} color="black" icon={<FiShoppingCart />}
-                />
-
                 <NavButton title="Chat" dotColor="yellow" customFunc={() => handleClick('chat')} color="black" icon={<BsChatLeft />}
                 />
 
@@ -61,16 +58,17 @@ const Navbar = () => {
 
                 <div className="flex items-center gap-2 cursor-pointer p-1" onClick={() => handleClick('userProfile')}>
                     <span>
-                        {/* {usuarios.map((usuario) => ( */}
-                             {/* <text key={usuario.id}>  */}
-                                {/* <Avatar name='' bg="transparent" src={tarea.descripcion} size='lg' top={1} mr={1} /> */}
-                                 {/* <span className="text-black-400 font-bold text-16 align-bottom" >Hola, {usuario.username}</span>  */}
-                             {/* </text>  */}
-                         {/* ))}  */}
+                        <text>
+                            <Stack direction='row' spacing={4}>
+                                <Avatar>
+                                    <AvatarBadge boxSize='1.25em' bg='green.500' />
+                                </Avatar>
+                            </Stack>
+                        </text>
+                        {/* <span className="text-black-400 font-bold text-16 align-bottom" >Hola, {usuarios.username}</span> */}
                     </span>
                     <MdKeyboardArrowDown />
                 </div>
-                {isClicked.cart && <Cart />}
                 {isClicked.chat && <Chat />}
                 {isClicked.notification && <Notification />}
                 {isClicked.userProfile && <UserProfile />}

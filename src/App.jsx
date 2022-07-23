@@ -11,6 +11,7 @@ import { Login } from './components/Login';
 import { Equipos } from './components/Equipos';
 import { CrearEquipo } from './components/CrearEquipo';
 import { MisEquipos } from './components/MisEquipos';
+import { Registro } from './components/Registro';
 
 export function App() {
   const { activeMenu } = useStateContext();
@@ -47,6 +48,7 @@ export function App() {
               <Routes>
                 <Route path="/" element={<Inicio />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Registro />} />
 
                 {/* Tareas */}
                 <Route path="/tareas" element={<Tareas />} />
@@ -57,6 +59,7 @@ export function App() {
                 <Route path="/equipos" element={<Equipos />} />
                 <Route path="/misEquipos" element={<MisEquipos />} />
                 <Route path="/nuevoEquipo" element={<CrearEquipo />} />
+                
               </Routes>
             </div>
           </div>
