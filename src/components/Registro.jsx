@@ -19,13 +19,11 @@ export function Registro() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-       
         const registro = { username, password, nombre, apellidos, email };
         fetch('https://t-planifica.herokuapp.com/register', {
             method: 'POST',
-            headers: { "Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(registro)
-            
         }).then(() => {
             alert("Se ha registrado correctamente")
         })

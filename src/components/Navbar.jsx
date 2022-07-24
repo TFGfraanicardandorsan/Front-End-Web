@@ -39,11 +39,11 @@ const Navbar = () => {
     }, [screenSize]);
 
 
-    const [usuarios, setUsuarios] = useState([]);
+    // const [usuarios, setUsuarios] = useState([]);
 
-    useEffect(() => {
-        API.getMisDatos().then(setUsuarios);
-    }, []);
+    // useEffect(() => {
+    //     API.getMisDatos().then(setUsuarios);
+    // }, []);
 
     return (
         <div className="flex justify-between p-2 md:mx-6 relative">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { Tareas } from './components/Tareas';
 import { CrearTarea } from './components/CrearTarea';
@@ -13,8 +13,17 @@ import { CrearEquipo } from './components/CrearEquipo';
 import { MisEquipos } from './components/MisEquipos';
 import { Registro } from './components/Registro';
 
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated  = window.sessionStorage.getItem('jwt');
+  if (!isAuthenticated) {
+    return <Navigate to='/login' />
+  }
+  return children
+}
+
 export function App() {
   const { activeMenu } = useStateContext();
+
   return (
     <UserContextProvider>
       <div>
@@ -46,20 +55,19 @@ export function App() {
 
             <div>
               <Routes>
-                <Route path="/" element={<Inicio />} />
+                <Route path="/" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Registro />} />
 
                 {/* Tareas */}
-                <Route path="/tareas" element={<Tareas />} />
+                <Route path="/tareas" element={<ProtectedRoute> <Tareas /> </ProtectedRoute>} />
                 <Route path="/mistareas" element="MisTareas" />
-                <Route path="/nuevaTarea" element={<CrearTarea />} />
+                <Route path="/nuevaTarea" element={<ProtectedRoute><CrearTarea /></ProtectedRoute>} />
 
                 {/* Equipos */}
-                <Route path="/equipos" element={<Equipos />} />
-                <Route path="/misEquipos" element={<MisEquipos />} />
-                <Route path="/nuevoEquipo" element={<CrearEquipo />} />
-                
+                <Route path="/equipos" element={<ProtectedRoute><Equipos /></ProtectedRoute>} />
+                <Route path="/misEquipos" element={<ProtectedRoute><MisEquipos /></ProtectedRoute>} />
+                <Route path="/nuevoEquipo" element={<ProtectedRoute><CrearEquipo /></ProtectedRoute>} />
               </Routes>
             </div>
           </div>
