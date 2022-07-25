@@ -3,8 +3,11 @@ import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from 'date-fns/locale/es';
 registerLocale('es', es)
-import { Heading, FormControl, FormLabel, Input, Box, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
-    NumberDecrementStepper, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Select, Switch, Button } from '@chakra-ui/react'
+import Navbar from './Navbar';
+import {
+    Heading, FormControl, FormLabel, Input, Box, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
+    NumberDecrementStepper, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Select, Switch, Button
+} from '@chakra-ui/react'
 
 export function CrearEquipo() {
     const [nombre, setNombre] = useState('');
@@ -13,13 +16,15 @@ export function CrearEquipo() {
         e.preventDefault();
 
         const jwt = window.sessionStorage.getItem('jwt');
-        const equipo = { nombre};
+        const equipo = { nombre };
         fetch('https://t-planifica.herokuapp.com/nuevoEquipo', {
             method: 'POST',
-            headers: { "Content-Type": "application/json",
-            "Authorization": `Bearer ${jwt}`},
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${jwt}`
+            },
             body: JSON.stringify(equipo)
-            
+
         }).then(() => {
             alert("Se ha creado el equipo")
         })
@@ -27,6 +32,9 @@ export function CrearEquipo() {
 
     return (
         <>
+            <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
+                <Navbar />
+            </div>
             <Heading align="center" as="h1" size="2xl" m={4} >Crear Equipo</Heading>
             < Box bg="yellow.200" p={4} m={4} borderRadius="lg" >
                 <form onSubmit={handleSubmit}>

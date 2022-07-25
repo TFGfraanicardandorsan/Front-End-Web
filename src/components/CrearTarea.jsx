@@ -3,8 +3,11 @@ import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from 'date-fns/locale/es';
 registerLocale('es', es)
-import { Heading, FormControl, FormLabel, Input, Box, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
-    NumberDecrementStepper, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Select, Switch, Button } from '@chakra-ui/react'
+import Navbar from './Navbar';
+import {
+    Heading, FormControl, FormLabel, Input, Box, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
+    NumberDecrementStepper, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Select, Switch, Button
+} from '@chakra-ui/react'
 
 export function CrearTarea() {
     const [nombre, setNombre] = useState('');
@@ -23,10 +26,12 @@ export function CrearTarea() {
         const tarea = { nombre, descripcion, fechaInicio, fechaFin, duracion, priorizacion, estado };
         fetch('https://t-planifica.herokuapp.com/nuevaTarea', {
             method: 'POST',
-            headers: { "Content-Type": "application/json",
-            "Authorization": `Bearer ${jwt}`},
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${jwt}`
+            },
             body: JSON.stringify(tarea)
-            
+
         }).then(() => {
             alert("Se ha creado la tarea")
         })
@@ -34,6 +39,10 @@ export function CrearTarea() {
 
     return (
         <>
+            <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
+                <Navbar />
+            </div>
+
             <Heading align="center" as="h1" size="2xl" m={4} >Crear Tarea</Heading>
             < Box bg="yellow.200" p={4} m={4} borderRadius="lg" >
                 <form onSubmit={handleSubmit}>

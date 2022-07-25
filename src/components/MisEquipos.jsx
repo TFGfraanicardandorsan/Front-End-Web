@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Box, Flex, Text, Spacer, Heading } from "@chakra-ui/react"
 import * as API from "../services/equipos";
+import Navbar from './Navbar';
 
 export function MisEquipos() {
 
@@ -12,6 +13,9 @@ export function MisEquipos() {
 
   return (
     <>
+      <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
+        <Navbar />
+      </div>
       <Heading align="center" as="h1" size="2xl" m={4} >
         Mis Equipos
       </Heading>
@@ -46,7 +50,7 @@ export function MisEquipos() {
                 <br></br>
               </Text>
               <Spacer />
-              </Flex>
+            </Flex>
           </Box>
         ))}
       </section>

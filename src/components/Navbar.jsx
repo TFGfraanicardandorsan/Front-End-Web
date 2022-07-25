@@ -8,20 +8,23 @@ import { Chat, Notification, UserProfile } from '.';
 import { useStateContext } from "../contents/ContextProvider";
 import * as API from "../services/usuarios";
 
-
-
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     <Box>
-        <button type="button" onClick={customFunc} style={{ color }}
+        <button
+            type="button"
+            onClick={() => customFunc()}
+            style={{ color }}
             className="relative text-xl rounded-full p-3"
         >
-            <span style={{ background: dotColor }} className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2" />
+            <span
+                style={{ background: dotColor }}
+                className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2" />
             {icon}
         </button>
     </Box>
 )
 const Navbar = () => {
-    const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick, screenSize, setScreenSize } = useStateContext();
+    const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
 
     useEffect(() => {
         const handleResize = () => setScreenSize(window.innerWidth);
@@ -39,11 +42,10 @@ const Navbar = () => {
     }, [screenSize]);
 
 
-    // const [usuarios, setUsuarios] = useState([]);
-
-    // useEffect(() => {
-    //     API.getMisDatos().then(setUsuarios);
-    // }, []);
+    const [usuarios, setUsuarios] = useState([]);
+    useEffect(() => {
+        API.getMisDatos().then(setUsuarios);
+    }, []);
 
     return (
         <div className="flex justify-between p-2 md:mx-6 relative">
@@ -55,9 +57,9 @@ const Navbar = () => {
 
                 <NavButton title="Notification" dotColor="yellow" customFunc={() => handleClick('notification')} color="black" icon={<RiNotification3Line />}
                 />
-
-                <div className="flex items-center gap-2 cursor-pointer p-1" onClick={() => handleClick('userProfile')}>
-                    <span>
+                <Box>
+                    <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
+                        onClick={() => handleClick('userProfile')}>
                         <text>
                             <Stack direction='row' spacing={4}>
                                 <Avatar>
@@ -65,15 +67,17 @@ const Navbar = () => {
                                 </Avatar>
                             </Stack>
                         </text>
-                        {/* <span className="text-black-400 font-bold text-16 align-bottom" >Hola, {usuarios.username}</span> */}
-                    </span>
-                    <MdKeyboardArrowDown />
-                </div>
-                {isClicked.chat && <Chat />}
-                {isClicked.notification && <Notification />}
-                {isClicked.userProfile && <UserProfile />}
+                        <span className="text-black-400 font-bold text-16 align-bottom" >
+                            <i>Hola, {usuarios.username}</i>
+                        </span>
+                        <MdKeyboardArrowDown />
+                    </div>
+                </Box>
+
+                {isClicked.notification && (<Notification />)}
+                {isClicked.userProfile && (<UserProfile />)}
             </div>
         </div>
-    )
-}
+    );
+};
 export default Navbar

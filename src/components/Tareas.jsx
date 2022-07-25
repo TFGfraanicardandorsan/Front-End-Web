@@ -3,7 +3,7 @@ import { HiCalendar, HiClock } from "react-icons/hi";
 import { MdOutlineAutoDelete } from "react-icons/md"
 import { Box, Flex, Text, Spacer, Tag, Button, Heading, Image } from "@chakra-ui/react"
 import * as API from "../services/tareas";
-
+import Navbar from './Navbar';
 export function Tareas() {
 
   const [tareas, setTareas] = useState([]);
@@ -12,28 +12,36 @@ export function Tareas() {
     API.getAllTareas().then(setTareas);
   }, []);
 
-    function borrarTarea(id){
-      fetch ('https://t-planifica.herokuapp.com/borrarTarea/'+ id,{
+  function borrarTarea(id) {
+    fetch('https://t-planifica.herokuapp.com/borrarTarea/' + id, {
       method: 'DELETE',
-      headers: { "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token}` }
-    }}).then(() => {
+      headers: {
+        "Content-Type": "application/json",
+        // "Authorization": `Bearer ${token}` }
+      }
+    }).then(() => {
       console.log('Borrar tarea');
       getData();
-  })
+    })
   }
 
   async function getData() {
-    let result = await fetch ('https://t-planifica.herokuapp.com/tareas');
-    result= await result.json();
+    let result = await fetch('https://t-planifica.herokuapp.com/tareas');
+    result = await result.json();
     setTareas(result);
   }
 
   return (
     <>
+      <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
+        <Navbar />
+      </div>
+
       <Heading align="center" as="h1" size="2xl" m={4} >
         Tareas
       </Heading>
+
+
       <section>
         {tareas.map((tarea) => (
           < Box
@@ -51,7 +59,7 @@ export function Tareas() {
                 <br></br>
               </Text>
               <Spacer />
-              <Tag p={4} colorScheme= "green" >
+              <Tag p={4} colorScheme="green" >
                 {tarea.estado}
               </Tag>
 
