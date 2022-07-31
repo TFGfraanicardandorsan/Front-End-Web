@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, NavLink } from 'react-router-dom';
-import { SiShopware } from 'react-icons/si'
+import { Link } from 'react-router-dom';
 import { MdOutlineCancel } from 'react-icons/md'
-import { Box, Text, Flex, Button, ButtonGroup, Image } from '@chakra-ui/react'
+import { Box, Text, Flex, Button, Image } from '@chakra-ui/react'
 import { FaTasks } from 'react-icons/fa'
 import { AiOutlineTeam } from 'react-icons/ai'
 import { RiTeamLine } from 'react-icons/ri'

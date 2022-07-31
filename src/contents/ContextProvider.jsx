@@ -4,7 +4,7 @@ const StateContext = createContext();
 
 const initialState = {
     // chat: false,
-    // userProfile:false,
+    userProfile:false,
     notification: false,
 };
 

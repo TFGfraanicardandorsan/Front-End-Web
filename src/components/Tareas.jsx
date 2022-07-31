@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
 import { HiCalendar, HiClock } from "react-icons/hi";
 import { MdOutlineAutoDelete } from "react-icons/md"
-import { Box, Flex, Text, Spacer, Tag, Button, Heading, Image } from "@chakra-ui/react"
+import { Box, Flex, Text, Spacer, Tag, Button, Heading, Image, Select } from "@chakra-ui/react"
 import * as API from "../services/tareas";
 import Navbar from './Navbar';
+import * as APP from '../services/equipos'
+
 export function Tareas() {
 
   const [tareas, setTareas] = useState([]);
+  const [equipos, setEquipos] = useState([]);
+  const [equipoId, setEquipoId] = useState('');
 
   useEffect(() => {
     API.getAllTareas().then(setTareas);
   }, []);
+
+  useEffect(() => {
+    APP.getEquiposAdministrados().then(setEquipos);
+  }, [])
 
   function borrarTarea(id) {
     fetch('https://t-planifica.herokuapp.com/borrarTarea/' + id, {
@@ -23,6 +31,28 @@ export function Tareas() {
       console.log('Borrar tarea');
       getData();
     })
+  }
+
+  const API_URL = 'https://t-planifica.herokuapp.com'
+  async function asignarTareaEquipo(idTarea, idEquipo) {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
+
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/tarea/` + idTarea + '/asociar/' + idEquipo, myInit);
+    try {
+      const response = await fetch(myRequest)
+      return await response.json();
+    } catch (error) {
+    }
   }
 
   async function getData() {
@@ -88,6 +118,18 @@ export function Tareas() {
               <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
                 onClick={() => borrarTarea(tarea.id)} >
                 <MdOutlineAutoDelete />
+              </Button>
+
+              <Select placeholder='Selecciona una opción' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
+                onChange={(e) => setEquipoId(e.target.value)} >
+                {equipos.map((equipo) => (
+                  <option key={equipo.id} value={equipo.id}>{equipo.nombre}</option>
+                ))}
+              </Select>
+                
+              <Button colorScheme='black' variant='outline' borderColor='black' ml={3} focusBorderColor='black' borderRadius={40} size='lg'
+                onClick={() => asignarTareaEquipo(tarea.id, equipoId)} >
+                Asociar
               </Button>
             </Flex>
           </Box>

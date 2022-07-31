@@ -17,13 +17,13 @@ export function CrearTarea() {
     const [duracion, setDuracion] = useState('');
     const [priorizacion, setPriorizacion] = useState('');
     const [terminada, setTerminada] = useState(false);
-    const [estado, setEstado] = useState('');
+    // const [estado, setEstado] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const jwt = window.sessionStorage.getItem('jwt');
-        const tarea = { nombre, descripcion, fechaInicio, fechaFin, duracion, priorizacion, estado };
+        const tarea = { nombre, descripcion, fechaInicio, fechaFin, duracion, priorizacion };
         fetch('https://t-planifica.herokuapp.com/nuevaTarea', {
             method: 'POST',
             headers: {
@@ -116,7 +116,7 @@ export function CrearTarea() {
                         </Select>
                     </FormControl>
                     <br></br>
-                    <FormControl isRequired >
+                    {/* <FormControl isRequired >
                         <FormLabel> Estado </FormLabel>
                         <Select placeholder='Selecciona un estado para la tarea' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
                             onChange={(e) => setEstado(e.target.value)} >
@@ -127,7 +127,7 @@ export function CrearTarea() {
                             <option>5</option>
                             <option>6</option>
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
                     <br /> <br />
                     <button>
                         <Button colorScheme='black' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>

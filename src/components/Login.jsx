@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Heading, FormControl, FormLabel, Input, Box, Button, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { Heading, FormControl, FormLabel, Input, Box, Button, InputGroup, InputRightElement, Text } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { IoEyeSharp } from 'react-icons/io5'
 import { FaEyeSlash } from 'react-icons/fa'
+import { Link, NavLink } from 'react-router-dom';
 import useUser from '../hooks/useUser'
 
 export function Login() {
@@ -63,6 +64,11 @@ export function Login() {
                                 Entrar
                             </Button>
                         </button>
+                        <Link to="/register">
+                                    <Text fontSize="xl" ml={2} mr={3}>
+                                        <strong>¿No tienes cuenta todavía? <i>Comienza ya.</i></strong>
+                                    </Text>
+                                </Link>
                     </form>
                 }
                 {
