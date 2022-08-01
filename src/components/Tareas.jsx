@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { HiCalendar, HiClock } from "react-icons/hi";
 import { MdOutlineAutoDelete } from "react-icons/md"
+import { BsClipboardPlus, BsPersonPlus } from "react-icons/bs"
 import { Box, Flex, Text, Spacer, Tag, Button, Heading, Image, Select } from "@chakra-ui/react"
 import * as API from "../services/tareas";
 import Navbar from './Navbar';
@@ -8,6 +9,7 @@ import * as APP from '../services/equipos'
 
 export function Tareas() {
 
+  const API_URL = 'https://t-planifica.herokuapp.com'
   const [tareas, setTareas] = useState([]);
   const [equipos, setEquipos] = useState([]);
   const [equipoId, setEquipoId] = useState('');
@@ -21,7 +23,7 @@ export function Tareas() {
   }, [])
 
   function borrarTarea(id) {
-    fetch('https://t-planifica.herokuapp.com/borrarTarea/' + id, {
+    fetch(`${API_URL}/borrarTarea/` + id, {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +35,13 @@ export function Tareas() {
     })
   }
 
-  const API_URL = 'https://t-planifica.herokuapp.com'
+  async function getData() {
+    let result = await fetch(`${API_URL}/tareas`);
+    result = await result.json();
+    setTareas(result);
+  }
+
+ 
   async function asignarTareaEquipo(idTarea, idEquipo) {
     const jwt = window.sessionStorage.getItem('jwt');
     const myHeader = new Headers({
@@ -55,11 +63,27 @@ export function Tareas() {
     }
   }
 
-  async function getData() {
-    let result = await fetch('https://t-planifica.herokuapp.com/tareas');
-    result = await result.json();
-    setTareas(result);
+  async function asignarTareaUsuario(idTarea, idUsuario) {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
+
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/tarea/` + idTarea + '/asignar/' + idUsuario, myInit);
+    try {
+      const response = await fetch(myRequest)
+      return await response.json();
+    } catch (error) {
+    }
   }
+
 
   return (
     <>
@@ -117,7 +141,7 @@ export function Tareas() {
 
               <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
                 onClick={() => borrarTarea(tarea.id)} >
-                <MdOutlineAutoDelete />
+                <font size="6"><MdOutlineAutoDelete /></font>
               </Button>
 
               <Select placeholder='Selecciona una opción' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
@@ -127,10 +151,16 @@ export function Tareas() {
                 ))}
               </Select>
                 
-              <Button colorScheme='black' variant='outline' borderColor='black' ml={3} focusBorderColor='black' borderRadius={40} size='lg'
+              <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
                 onClick={() => asignarTareaEquipo(tarea.id, equipoId)} >
-                Asociar
+                <font size="6"><BsClipboardPlus  /></font>
               </Button>
+
+              <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
+                onClick={() => asignarTareaUsuario(tarea.id, tarea.creator.id)} >
+                <font size="6"> <BsPersonPlus /></font>
+              </Button>
+
             </Flex>
           </Box>
         ))}
