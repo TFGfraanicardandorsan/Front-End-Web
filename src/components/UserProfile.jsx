@@ -20,16 +20,6 @@ const UserProfile = () => {
         API.getMisDatos().then(setUsuarios);
     }, []);
 
-    // <text> {usuarios.nombre}</text>
-
-    // return (
-    //     <>
-    //         <h1>MI PERFIL</h1>
-    //         <br></br>
-    //         <text> {usuarios.nombre}</text>
-    //     </>
-    // )
-
     return (
         <>
             <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">

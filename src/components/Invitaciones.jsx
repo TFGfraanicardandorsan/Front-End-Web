@@ -3,7 +3,7 @@ import { useStateContext } from '../contents/ContextProvider';
 import { MdOutlineCancel } from 'react-icons/md';
 import Button from './Button';
 
-const Notification = () => {
+const Invitaciones = () => {
     const { currentColor } = useStateContext();
   
     return (
@@ -14,6 +14,11 @@ const Notification = () => {
           </div>
           <Button icon={<MdOutlineCancel />} color="rgb(153, 171, 180)" bgHoverColor="light-gray" size="2xl" borderRadius="50%" />
         </div>
+        <div>
+                        {/* <p className="font-semibold text-xl dark:text-gray-200"> {usuarios.nombre} {usuarios.apellidos} </p>
+                    
+                        <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {usuarios.email} </p> */}
+                    </div>
           <div className="mt-5">
             <Button color="white" bgColor={currentColor} text="Ver todas las invitaciones" borderRadius="10px" width="full" />
           </div>
@@ -21,4 +26,4 @@ const Notification = () => {
     );
   };
   
-  export default Notification;
+  export default Invitaciones;

@@ -4,7 +4,7 @@ import { BsChatLeft } from 'react-icons/bs';
 import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { Avatar, AvatarBadge, Box, Stack } from '@chakra-ui/react';
-import { Chat, Notification, UserProfile } from '.';
+import { Chat,Invitaciones, UserProfile } from '.';
 import { useStateContext } from "../contents/ContextProvider";
 import * as API from "../services/usuarios";
 
@@ -55,7 +55,7 @@ const Navbar = () => {
                 <NavButton title="Chat" dotColor="yellow" customFunc={() => handleClick('chat')} color="black" icon={<BsChatLeft />}
                 />
 
-                <NavButton title="Notification" dotColor="yellow" customFunc={() => handleClick('notification')} color="black" icon={<RiNotification3Line />}
+                <NavButton title="Invitaciones" dotColor="yellow" customFunc={() => handleClick('invitaciones')} color="black" icon={<RiNotification3Line />}
                 />
                 <Box>
                     <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
@@ -74,7 +74,7 @@ const Navbar = () => {
                     </div>
                 </Box>
 
-                {isClicked.notification && (<Notification />)}
+                {isClicked.invitaciones && (<Invitaciones />)}
                 {isClicked.userProfile && (<UserProfile />)}
             </div>
         </div>

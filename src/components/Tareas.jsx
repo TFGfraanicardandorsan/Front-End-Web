@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { HiCalendar, HiClock } from "react-icons/hi";
-import { MdOutlineAutoDelete } from "react-icons/md"
+import { HiCalendar, HiClock, HiOutlinePause } from "react-icons/hi";
+import { MdOutlineAutoDelete, MdOutlineNotStarted } from "react-icons/md"
+import { AiOutlineFileDone } from "react-icons/ai"
 import { BsClipboardPlus, BsPersonPlus } from "react-icons/bs"
 import { Box, Flex, Text, Spacer, Tag, Button, Heading, Image, Select } from "@chakra-ui/react"
 import * as API from "../services/tareas";
@@ -41,7 +42,7 @@ export function Tareas() {
     setTareas(result);
   }
 
- 
+
   async function asignarTareaEquipo(idTarea, idEquipo) {
     const jwt = window.sessionStorage.getItem('jwt');
     const myHeader = new Headers({
@@ -63,6 +64,7 @@ export function Tareas() {
     }
   }
 
+
   async function asignarTareaUsuario(idTarea, idUsuario) {
     const jwt = window.sessionStorage.getItem('jwt');
     const myHeader = new Headers({
@@ -79,11 +81,77 @@ export function Tareas() {
     const myRequest = new Request(`${API_URL}/tarea/` + idTarea + '/asignar/' + idUsuario, myInit);
     try {
       const response = await fetch(myRequest)
+      getData();
       return await response.json();
     } catch (error) {
     }
   }
 
+  async function TareaFinalizada(idTarea) {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
+
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/tarea/` + idTarea + '/finish', myInit);
+    try {
+      const response = await fetch(myRequest)
+      getData();
+      return await response.json();
+    } catch (error) {
+    }
+  }
+
+  async function TareaPausar(idTarea) {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
+
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/tarea/` + idTarea + '/pausar', myInit);
+    try {
+      const response = await fetch(myRequest)
+      getData();
+      return await response.json();
+    } catch (error) {
+    }
+  }
+
+  async function TareaEmpezar(idTarea) {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
+
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/tarea/` + idTarea + '/empezar', myInit);
+    try {
+      const response = await fetch(myRequest)
+      getData();
+      return await response.json();
+    } catch (error) {
+    }
+  }
 
   return (
     <>
@@ -150,10 +218,10 @@ export function Tareas() {
                   <option key={equipo.id} value={equipo.id}>{equipo.nombre}</option>
                 ))}
               </Select>
-                
+
               <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
                 onClick={() => asignarTareaEquipo(tarea.id, equipoId)} >
-                <font size="6"><BsClipboardPlus  /></font>
+                <font size="6"><BsClipboardPlus /></font>
               </Button>
 
               <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
@@ -162,6 +230,21 @@ export function Tareas() {
               </Button>
 
             </Flex>
+            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
+              onClick={() => TareaEmpezar(tarea.id)} >
+              <font size="6"> <MdOutlineNotStarted /> </font>
+            </Button>
+
+            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
+              onClick={() => TareaPausar(tarea.id)} >
+              <font size="6"> <HiOutlinePause /> </font>
+            </Button>
+
+            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
+              onClick={() => TareaFinalizada(tarea.id)} >
+              <font size="6"> <AiOutlineFileDone /> </font>
+            </Button>
+
           </Box>
         ))}
       </section>
