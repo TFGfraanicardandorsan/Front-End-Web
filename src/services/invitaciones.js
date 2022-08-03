@@ -1,3 +1,5 @@
+const API_URL = 'https://t-planifica.herokuapp.com'
+
 export async function getMisInvitaciones() {
     const jwt = window.sessionStorage.getItem('jwt');
     const myHeader = new Headers({
@@ -11,7 +13,7 @@ export async function getMisInvitaciones() {
         cache: 'default'
     };
 
-    const myRequest = new Request(`${API_URL}/invitations`, myInit);
+    const myRequest = new Request(`${API_URL}/invitaciones`, myInit);
     try {
         const response = await fetch(myRequest)
         return await response.json();
