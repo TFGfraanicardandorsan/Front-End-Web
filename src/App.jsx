@@ -14,6 +14,7 @@ import { MisEquipos } from './components/MisEquipos';
 import { Registro } from './components/Registro';
 import { MisTareas } from './components/MisTareas';
 import { MisInvitaciones } from './components/MisInvitaciones';
+import { CrearInvitacion } from './components/CrearInvitacion';
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated  = window.sessionStorage.getItem('jwt');
@@ -67,8 +68,10 @@ export function App() {
                 <Route path="/equipos" element={<ProtectedRoute><Equipos /></ProtectedRoute>} />
                 <Route path="/misEquipos" element={<ProtectedRoute><MisEquipos /></ProtectedRoute>} />
                 <Route path="/nuevoEquipo" element={<ProtectedRoute><CrearEquipo /></ProtectedRoute>} />
-
+                
+                {/* Invitaciones */}
                 <Route path="/invitaciones" element={<ProtectedRoute><MisInvitaciones /></ProtectedRoute>} />
+                <Route path="/nuevainvitacion" element={<ProtectedRoute><CrearInvitacion /></ProtectedRoute>} />
               </Routes>
             </div>
           </div>

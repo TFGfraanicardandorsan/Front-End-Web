@@ -45,9 +45,17 @@ export function Equipos() {
                 <br></br>
                 <strong>Equipo</strong> : {equipo.creador.equipo}
                 <br></br>
-                <strong>Asociados</strong> : {equipo.asociados.nombre} 
+                <strong>Asociados</strong> : {equipo.asociados.map((item, i) => (
+                  <text key={i}>
+                    {item.nombre} {item.apellidos} ;
+                  </text>
+                ))}
                 <br></br>
-                <strong>Managers</strong> : {equipo.managers.nombre}
+                <strong>Managers</strong> : {equipo.managers.map((item, i) => (
+                  <text key={i}>
+                    {item.nombre} {item.apellidos} ;
+                  </text>
+                ))}
                 <br></br>
               </Text>
               <Spacer />

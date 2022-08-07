@@ -115,19 +115,6 @@ export function CrearTarea() {
                             <option>3</option>
                         </Select>
                     </FormControl>
-                    <br></br>
-                    {/* <FormControl isRequired >
-                        <FormLabel> Estado </FormLabel>
-                        <Select placeholder='Selecciona un estado para la tarea' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
-                            onChange={(e) => setEstado(e.target.value)} >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                        </Select>
-                    </FormControl> */}
                     <br /> <br />
                     <button>
                         <Button colorScheme='black' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>
