@@ -44,9 +44,9 @@ export function MisEquipos() {
                 <br></br>
                 <strong>Equipo</strong> : {equipo.creador.equipo}
                 <br></br>
-                <strong>Asociados</strong> : {equipo.asociados}
+                <strong>Asociados</strong> : {equipo.asociados.nombre}
                 <br></br>
-                <strong>Managers</strong> : {equipo.managers}
+                <strong>Managers</strong> : {equipo.managers.nombre}
                 <br></br>
               </Text>
               <Spacer />

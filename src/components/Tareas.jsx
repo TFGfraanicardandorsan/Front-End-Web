@@ -7,6 +7,7 @@ import { Box, Flex, Text, Spacer, Tag, Button, Heading, Image, Select } from "@c
 import * as API from "../services/tareas";
 import Navbar from './Navbar';
 import * as APP from '../services/equipos'
+import * as AP from '../services/usuarios'
 
 export function Tareas() {
 
@@ -14,6 +15,7 @@ export function Tareas() {
   const [tareas, setTareas] = useState([]);
   const [equipos, setEquipos] = useState([]);
   const [equipoId, setEquipoId] = useState('');
+  const [usuario, setUsuario] = useState([]);
 
   useEffect(() => {
     API.getAllTareas().then(setTareas);
@@ -21,6 +23,10 @@ export function Tareas() {
 
   useEffect(() => {
     APP.getEquiposAdministrados().then(setEquipos);
+  }, [])
+
+  useEffect(() => {
+    AP.getMisDatos().then(setUsuario);
   }, [])
 
   function borrarTarea(id) {
@@ -225,7 +231,7 @@ export function Tareas() {
               </Button>
 
               <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
-                onClick={() => asignarTareaUsuario(tarea.id, tarea.creator.id)} >
+                onClick={() => asignarTareaUsuario(tarea.id, usuario.id)} >
                 <font size="6"> <BsPersonPlus /></font>
               </Button>
 

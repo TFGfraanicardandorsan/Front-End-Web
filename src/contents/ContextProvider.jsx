@@ -3,9 +3,9 @@ import React, { createContext, useContext, useState } from 'react';
 const StateContext = createContext();
 
 const initialState = {
-    // chat: false,
+    invitaciones: false,
     userProfile:false,
-    notification: false,
+    notificaciones: false,
 };
 
 export const ContextProvider = ({ children }) => {

@@ -41,7 +41,6 @@ const UserProfile = () => {
                             </Stack>
                     <div>
                         <p className="font-semibold text-xl dark:text-gray-200"> {usuarios.nombre} {usuarios.apellidos} </p>
-                        {/* <p className="text-gray-500 text-sm dark:text-gray-400">  {usuarios.apellidos}   </p> */}
                         <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {usuarios.email} </p>
                     </div>
                 </div>
