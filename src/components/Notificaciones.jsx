@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useStateContext } from '../contents/ContextProvider';
-import { MdOutlineCancel } from 'react-icons/md';
+import { MdOutlineCancel, MdOutlineAutoDelete } from 'react-icons/md';
 import Button from './Button';
 import { Box } from "@chakra-ui/react"
 import { Link } from 'react-router-dom';
@@ -8,13 +8,49 @@ import * as API from '../services/notificaciones'
 
 const Notificaciones = () => {
 
+  const API_URL = 'https://t-planifica.herokuapp.com'
+  const { currentColor } = useStateContext();
   const [notificaciones, setNotificaciones] = useState([]);
 
   useEffect(() => {
     API.getMisNotificaciones().then(setNotificaciones);
   }, []);
 
-  const { currentColor } = useStateContext();
+  function borrarNotificacion(id) {
+    fetch(`${API_URL}/borrarNotificacion/` + id, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }).then(() => {
+      console.log('Borrar notificacion');
+      getData();
+    })
+  }
+
+  async function getData() {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
+
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/misNotificaciones`, myInit);
+    try {
+      let response = await fetch(myRequest)
+      response = await response.json();
+      setNotificaciones(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   return (
     <>
@@ -38,6 +74,12 @@ const Notificaciones = () => {
               <p className="font-semibold text-xl dark:text-gray-200"> Mensaje: {notificacion.mensaje} </p>
               <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> Tipo: {notificacion.tipoNotificacion} </p>
               <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> Referencia: {notificacion.referencia} </p>
+              
+              <Button icon = {<MdOutlineAutoDelete />} color="rgb(255, 255, 255)"  size="2xl" borderRadius="50%" 
+                onClick={() => borrarTarea(tarea.id)} >
+                <font size="6"><MdOutlineAutoDelete /></font>
+              </Button>
+
             </Box>
           ))}
         </div>
