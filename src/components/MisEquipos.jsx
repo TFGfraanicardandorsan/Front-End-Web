@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { HiCalendar, HiClock, HiOutlineX } from "react-icons/hi";
+import { BsJournalCheck } from "react-icons/bs";
 import {
   Box, Flex, Text, Spacer, Heading, Button, Select, Modal,
   ModalOverlay,
@@ -6,11 +8,19 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton, useDisclosure
+  ModalCloseButton, useDisclosure, Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor, Portal
 } from "@chakra-ui/react"
-import { BsClipboardPlus, BsPersonPlus } from "react-icons/bs"
 import { RiUserSearchFill } from "react-icons/ri"
 import * as API from "../services/equipos";
+import * as APP from "../services/usuarios";
 import Navbar from './Navbar';
 
 
@@ -20,12 +30,17 @@ export function MisEquipos() {
   const [equipos, setEquipos] = useState([]);
   const [data, setData] = useState([]);
   const [managers, setManagers] = useState([]);
+  const [asociados, setAsociados] = useState([])
+  const [usuario, setUsuario] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     API.getMisEquipos().then(setEquipos);
   }, []);
 
+  useEffect(() => {
+    APP.getMisDatos().then(setUsuario);
+  }, [])
 
   async function getEncontrarCompaneros(equipoId) {
     const jwt = window.sessionStorage.getItem('jwt');
@@ -73,6 +88,79 @@ export function MisEquipos() {
           console.log(json);
           setManagers(json);
         });
+    } catch (error) {
+    }
+  }
+
+  async function encontrarAsociados(idEquipo) {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
+
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/` + idEquipo + '/asociados', myInit);
+    try {
+      await fetch(myRequest)
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setAsociados(json);
+        });
+    } catch (error) {
+    }
+  }
+
+  async function ascenderManager(idEquipo, idUsuario) {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
+
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/equipo/` + idEquipo + '/volverManager/' + idUsuario, myInit);
+    try {
+      await fetch(myRequest)
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+        });
+    } catch (error) {
+    }
+  }
+
+  async function descenderManager(idEquipo, idUsuario) {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
+
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/equipo/` + idEquipo + '/volveAsociado/' + idUsuario, myInit);
+    try {
+      await fetch(myRequest)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+      });
     } catch (error) {
     }
   }
@@ -143,29 +231,56 @@ export function MisEquipos() {
                   </ModalFooter>
                 </ModalContent>
               </Modal>
-              <Spacer/>
-              {/* <Button onClick={() => { encontrarManagers(equipo.id); onOpen(); }} > <font size="6"><RiUserSearchFill /></font> Managers</Button>
-              <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>Managers</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    {managers.map((item) => (
-                      <li key={item.id} >
-                        {item.nombre} {item.apellidos}
-                      </li>
-                    ))}
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button colorScheme='yellow' mr={3} onClick={onClose}>
-                      Cerrar
-                    </Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal> */}
               <Spacer />
+              <Popover>
+                <PopoverTrigger>
+                  <Button onClick={() => encontrarManagers(equipo.id)} ><font size="6"><RiUserSearchFill /></font> Managers</Button>
+                </PopoverTrigger>
+                <Portal>
+                  <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverHeader><font size="5"><strong>Managers</strong></font></PopoverHeader>
+                    <PopoverCloseButton />
+                    <PopoverBody>
+                      {managers.map((item) => (
+                        <li key={item.id} >
+                          {item.nombre} {item.apellidos}
+                        </li>
+                      ))}
+                    </PopoverBody>
+                  </PopoverContent>
+                </Portal>
+              </Popover>
+              <Spacer />
+              <Popover>
+                <PopoverTrigger>
+                  <Button onClick={() => encontrarAsociados(equipo.id)} ><font size="6"><RiUserSearchFill /></font> Asociados</Button>
+                </PopoverTrigger>
+                <Portal>
+                  <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverHeader><font size="5"><strong>Asociados</strong></font></PopoverHeader>
+                    <PopoverCloseButton />
+                    <PopoverBody>
+                      {asociados.map((item) => (
+                        <li key={item.id} >
+                          {item.nombre} {item.apellidos}
+                        </li>
+                      ))}
+                    </PopoverBody>
+                  </PopoverContent>
+                </Portal>
+              </Popover>
             </Flex>
+            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
+              onClick={() => ascenderManager(equipo.id,usuario.id)} >
+              <font size="6"><BsJournalCheck /></font>
+            </Button>
+
+            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
+              onClick={() => descenderManager(equipo.id,usuario.id)} >
+              <font size="6"> <HiOutlineX /></font>
+            </Button>
           </Box>
         ))}
       </section>
