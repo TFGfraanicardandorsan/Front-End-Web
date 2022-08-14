@@ -5,6 +5,7 @@ import { FiSettings } from 'react-icons/fi';
 import { Tareas } from './components/Tareas';
 import { CrearTarea } from './components/CrearTarea';
 import { Navbar, Footer, Sidebar, Inicio } from './components';
+import CookieConsent from 'react-cookie-consent';
 import { UserContextProvider } from './contents/UserContext';
 import { useStateContext } from './contents/ContextProvider';
 import { Login } from './components/Login';
@@ -32,13 +33,13 @@ export function App() {
       <div>
         <div className="flex relative dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
-            <button
+            {/* <button
               type="button"
               onClick={() => setThemeSettings(true)}
               style={{ background: 'black', borderRadius: '50%' }}
               className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray">
               <FiSettings />
-            </button>
+            </button> */}
           </div>
           {activeMenu ? (
             <div className='w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white'>
@@ -54,6 +55,11 @@ export function App() {
           }>
            
             <div>
+              <CookieConsent
+              // debug={true}
+              buttonText= "Acepto"
+              >
+                Este sitio usa cookies. Puedes ver nuestra <a href='/privacy'> <strong><u>política de privacidad</u></strong></a> para más</CookieConsent>
               <Routes>
                 <Route path="/" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />
                 <Route path="/login" element={<Login />} />

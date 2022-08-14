@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useStateContext } from '../contents/ContextProvider';
-import { MdOutlineCancel, MdOutlineAutoDelete } from 'react-icons/md';
+import { MdOutlineCancel } from 'react-icons/md';
 import Button from './Button';
 import { Box } from "@chakra-ui/react"
 import { Link } from 'react-router-dom';
@@ -16,18 +16,27 @@ const Notificaciones = () => {
     API.getMisNotificaciones().then(setNotificaciones);
   }, []);
 
-  function borrarNotificacion(id) {
-    fetch(`${API_URL}/borrarNotificacion/` + id, {
-      method: 'DELETE',
-      headers: {
-        "Content-Type": "application/json",
-      }
-    }).then(() => {
-      console.log('Borrar notificacion');
-      getData();
-    })
-  }
+  async function ocultarNotificacion(id) {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+      "Authorization": `Bearer ${jwt}`
+    });
 
+    const myInit = {
+      method: 'GET',
+      headers: myHeader,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/ocultarNotificacion/` + id, myInit);
+    try {
+      const response = await fetch(myRequest)
+      getData();
+      return await response.json();
+    } catch (error) {
+    }
+  }
   async function getData() {
     const jwt = window.sessionStorage.getItem('jwt');
     const myHeader = new Headers({
@@ -51,7 +60,6 @@ const Notificaciones = () => {
     }
   }
 
-
   return (
     <>
       <div className="nav-item absolute right-5 md:right-40 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -74,16 +82,19 @@ const Notificaciones = () => {
               <p className="font-semibold text-xl dark:text-gray-200"> Mensaje: {notificacion.mensaje} </p>
               <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> Tipo: {notificacion.tipoNotificacion} </p>
               <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> Referencia: {notificacion.referencia} </p>
-              
-              <Button icon = {<MdOutlineAutoDelete />} color="rgb(255, 255, 255)"  size="2xl" borderRadius="50%" 
-                onClick={() => borrarTarea(tarea.id)} >
-                <font size="6"><MdOutlineAutoDelete /></font>
-              </Button>
+
+              <div class="flex space-x-2 justify-center">
+                <button onClick={() => ocultarNotificacion(notificacion.id)}
+                type="button" class="inline-block px-6 py-2.5  text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-white-600 hover:shadow-lg focus:bg-black-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-black active:shadow-lg transition duration-150 ease-in-out flex items-center">
+                  Ocultar Notificación
+                  <span class="inline-block py-1 px-1.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-200 text-black rounded ml-2"><font size="5"><MdOutlineCancel /></font></span>
+                </button>
+              </div>
 
             </Box>
           ))}
         </div>
-        <div className="mt-5">
+        {/* <div className="mt-5">
           <Link to='/notificaciones' >
             <Button color="white"
               bgColor={currentColor}
@@ -91,7 +102,7 @@ const Notificaciones = () => {
               borderRadius="10px" width="full"
             />
           </Link>
-        </div>
+        </div> */}
       </div>
     </>
   );
