@@ -14,7 +14,8 @@ export function Inicio() {
 
     const [tareasHoy, setTareasHoy] = useState([]);
     const [tareasInacabadasHoy, setTareasInacabadasHoy] = useState([]);
-
+    const valor = (((tareasHoy.length - tareasInacabadasHoy.length) / tareasHoy.length) * 100)
+    
     useEffect(() => {
         API.getTareasHoy().then(setTareasHoy);
     }, []);
@@ -31,8 +32,8 @@ export function Inicio() {
                 <Navbar />
             </div>
             <section>
-                <CircularProgress value={1} color='yellow' max={tareasHoy.length} min={0}>
-                    <CircularProgressLabel>{tareasHoy.length}</CircularProgressLabel>
+                <CircularProgress value={valor} color='yellow' max={100} min={0}>
+                    <CircularProgressLabel> {valor}% </CircularProgressLabel>
                 </CircularProgress>
             </section>
         </>
