@@ -17,7 +17,7 @@ export function Login() {
     const { isLoginLoading, hasLoginError, login, isLogged } = useUser();
 
     useEffect(() => {
-        if (isLogged) navigate('/')
+        if (isLogged) navigate('/inicio')
     }, [isLogged, navigate])
 
     const handleSubmit = (e) => {
