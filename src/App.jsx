@@ -4,7 +4,7 @@ import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { Tareas } from './components/Tareas';
 import { CrearTarea } from './components/CrearTarea';
-import { Navbar, Footer, Sidebar, Inicio } from './components';
+import { Navbar, Footer, Sidebar} from './components';
 import CookieConsent from 'react-cookie-consent';
 import { UserContextProvider } from './contents/UserContext';
 import { useStateContext } from './contents/ContextProvider';
@@ -16,9 +16,10 @@ import { Registro } from './components/Registro';
 import { MisTareas } from './components/MisTareas';
 import { MisInvitaciones } from './components/MisInvitaciones';
 import { CrearInvitacion } from './components/CrearInvitacion';
+import { Inicio }  from './components/Inicio';
 
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated  = window.sessionStorage.getItem('jwt');
+  const isAuthenticated = window.sessionStorage.getItem('jwt');
   if (!isAuthenticated) {
     return <Navigate to='/login' />
   }
@@ -26,7 +27,7 @@ const ProtectedRoute = ({ children }) => {
 }
 
 export function App() {
-  const { setCurrentColor,currentColor, activeMenu } = useStateContext();
+  const { setCurrentColor, currentColor, activeMenu } = useStateContext();
 
   return (
     <UserContextProvider>
@@ -53,15 +54,15 @@ export function App() {
           <div className={
             `dark:bg-main-bg bg-main-bg min-h-screen w-full ${activeMenu ? 'md:ml-72' : 'flex-2'}`
           }>
-           
+
             <div>
               <CookieConsent
-              // debug={true}
-              buttonText= "Acepto"
+                // debug={true}
+                buttonText="Acepto"
               >
                 Este sitio usa cookies. Puedes ver nuestra <a href='/privacy'> <strong><u>política de privacidad</u></strong></a> para más</CookieConsent>
               <Routes>
-                <Route path="/" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />
+                <Route path="/inicio" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Registro />} />
 
@@ -74,15 +75,16 @@ export function App() {
                 <Route path="/equipos" element={<ProtectedRoute><Equipos /></ProtectedRoute>} />
                 <Route path="/misEquipos" element={<ProtectedRoute><MisEquipos /></ProtectedRoute>} />
                 <Route path="/nuevoEquipo" element={<ProtectedRoute><CrearEquipo /></ProtectedRoute>} />
-                
+
                 {/* Invitaciones */}
                 <Route path="/invitaciones" element={<ProtectedRoute><MisInvitaciones /></ProtectedRoute>} />
                 <Route path="/nuevainvitacion" element={<ProtectedRoute><CrearInvitacion /></ProtectedRoute>} />
               </Routes>
             </div>
-          </div>
+          </div>        
         </div>
       </div>
+      <Footer />
     </UserContextProvider>
   )
 }

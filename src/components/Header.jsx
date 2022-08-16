@@ -1,8 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { AiOutlineMenu } from 'react-icons/ai';
+import { Box } from '@chakra-ui/react';
+import { Notificaciones, Invitaciones, UserProfile } from '.';
+import { useStateContext } from "../contents/ContextProvider";
 
+const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
+    <Box>
+        <button
+            type="button"
+            onClick={() => customFunc()}
+            style={{ color }}
+            className="relative text-xl rounded-full p-3"
+        >
+            <span
+                style={{ background: dotColor }}
+                className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2" />
+            {icon}
+        </button>
+    </Box>
+)
 const Header = () => {
+    const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
+
+    useEffect(() => {
+        const handleResize = () => setScreenSize(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        if (screenSize <= 900) {
+            setActiveMenu(false);
+        } else {
+            setActiveMenu(true);
+        }
+    }, [screenSize]);
+
     return (
-        <div>Header</div>
-    )
-}
+        <div className="flex justify-between p-2 md:mx-6 relative">
+            <NavButton title="Menu" customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} color="black" icon={<AiOutlineMenu />} />
+
+            <div className="flex">
+                <Box>
+                    <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg">
+                        <h1>INICIAR SESIÓN</h1>
+                    </div>
+                </Box>
+            </div>
+        </div>
+    );
+};
 export default Header

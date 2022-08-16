@@ -6,4 +6,4 @@ export {default as Navbar} from './Navbar';
 export {default as UserProfile} from './UserProfile';
 export {default as Invitaciones} from './Invitaciones';
 export {default as Notificaciones} from './Notificaciones';
-export {default as Inicio} from './Inicio';
+// export {default as Inicio} from './Inicio';
