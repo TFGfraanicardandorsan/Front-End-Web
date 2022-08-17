@@ -1,18 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex, Text, Spacer, Tag, Button } from "@chakra-ui/react";
+import { Box, Flex, Text, Spacer, Tag, Button, Select } from "@chakra-ui/react";
 import { HiCalendar, HiClock } from "react-icons/hi";
 import { RiNotification3Line } from 'react-icons/ri';
-import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
+import { CircularProgress, CircularProgressLabel, Progress } from '@chakra-ui/react'
 import { BsChatLeft } from 'react-icons/bs';
 import Navbar from './Navbar';
 import * as API from "../services/tareas";
+import * as APP from "../services/invitaciones";
+import * as AP from "../services/notificaciones";
+import * as US from "../services/usuarios";
+import * as EQUI from "../services/equipos";
 import { IoIosMore } from 'react-icons/io';
 
 export function Inicio() {
 
-    // const API_URL = 'https://t-planifica.herokuapp.com'
+    const API_URL = 'https://t-planifica.herokuapp.com'
     const [tareasHoy, setTareasHoy] = useState([]);
     const [tareasInacabadasHoy, setTareasInacabadasHoy] = useState([]);
+    const [equipos, setEquipos] = useState([]);
+    const [misEquipos, setMisEquipos] = useState([]);
+    const [equipoId, setEquipoId] = useState('');
+    const [dato, setDato] = useState([]);
+    const [data, setData] = useState([]);
+    const [managers, setManagers] = useState([]);
+    const [asociados, setAsociados] = useState([])
+    const [invitaciones, setInvitaciones] = useState([]);
+    const [notificaciones, setNotificaciones] = useState([]);
+    const [usuarios, setUsuarios] = useState([]);
+
     const valor = (((tareasHoy.length - tareasInacabadasHoy.length) / tareasHoy.length) * 100)
 
     useEffect(() => {
@@ -22,6 +37,125 @@ export function Inicio() {
     useEffect(() => {
         API.getTareasHoyInacabadas().then(setTareasInacabadasHoy);
     }, []);
+
+    useEffect(() => {
+        EQUI.getEquiposAdministrados().then(setEquipos);
+    }, [])
+
+    useEffect(() => {
+        EQUI.getMisEquipos().then(setMisEquipos);
+    }, [])
+
+    useEffect(() => {
+        APP.getMisInvitaciones().then(setInvitaciones);
+    }, []);
+
+    useEffect(() => {
+        AP.getMisNotificaciones().then(setNotificaciones);
+    }, []);
+
+    useEffect(() => {
+        US.numeroUsuarios().then(setUsuarios);
+    }, []);
+
+    async function TareasEquipo(idEquipo) {
+        const jwt = window.sessionStorage.getItem('jwt');
+        const myHeader = new Headers({
+            "Authorization": `Bearer ${jwt}`
+        });
+
+        const myInit = {
+            method: 'GET',
+            headers: myHeader,
+            mode: 'cors',
+            cache: 'default'
+        };
+
+        const myRequest = new Request(`${API_URL}/tareasEquipo/` + idEquipo, myInit);
+        try {
+            await fetch(myRequest)
+                .then((response) => response.json())
+                .then((json) => {
+                    setDato(json);
+                });
+        } catch (error) {
+        }
+    }
+    async function getEncontrarCompaneros(equipoId) {
+        const jwt = window.sessionStorage.getItem('jwt');
+        const myHeader = new Headers({
+            "Authorization": `Bearer ${jwt}`
+        });
+
+        const myInit = {
+            method: 'GET',
+            headers: myHeader,
+            mode: 'cors',
+            cache: 'default'
+        };
+
+        const myRequest = new Request(`${API_URL}/` + equipoId + '/partners', myInit);
+        try {
+            await fetch(myRequest)
+                .then((response) => response.json())
+                .then((json) => {
+                    console.log(json);
+                    setData(json);
+                });
+        } catch (error) {
+        }
+    }
+
+    async function encontrarManagers(idEquipo) {
+        const jwt = window.sessionStorage.getItem('jwt');
+        const myHeader = new Headers({
+            "Authorization": `Bearer ${jwt}`
+        });
+
+        const myInit = {
+            method: 'GET',
+            headers: myHeader,
+            mode: 'cors',
+            cache: 'default'
+        };
+
+        const myRequest = new Request(`${API_URL}/` + idEquipo + '/managers', myInit);
+        try {
+            await fetch(myRequest)
+                .then((response) => response.json())
+                .then((json) => {
+                    console.log(json);
+                    setManagers(json);
+                });
+        } catch (error) {
+        }
+    }
+
+    async function encontrarAsociados(idEquipo) {
+        const jwt = window.sessionStorage.getItem('jwt');
+        const myHeader = new Headers({
+            "Authorization": `Bearer ${jwt}`
+        });
+
+        const myInit = {
+            method: 'GET',
+            headers: myHeader,
+            mode: 'cors',
+            cache: 'default'
+        };
+
+        const myRequest = new Request(`${API_URL}/` + idEquipo + '/asociados', myInit);
+        try {
+            await fetch(myRequest)
+                .then((response) => response.json())
+                .then((json) => {
+                    console.log(json);
+                    setAsociados(json);
+                });
+        } catch (error) {
+        }
+    }
+
 
     return (
         <>
@@ -34,18 +168,17 @@ export function Inicio() {
                         <div className="flex justify-between items-right">
                             <div>
                                 <p className="font-bold text-white">Usuarios</p>
-                                <p className="text-2xl text-white">40</p>
+                                <p className="text-3xl text-white">{usuarios}</p>
                             </div>
                         </div>
                     </div>
-
                     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-40 rounded-xl w-full lg:w-80 p-8 pt-9 m-3  ">
                         <div className="flex justify-between items-right">
                             <div>
                                 <p className="font-bold text-black">Notificaciones</p>
-                                <p className="text-2xl text-black">40</p>
+                                <p className="text-3xl text-black">{notificaciones.length}</p>
                             </div>
-                            <RiNotification3Line size='30px'/>
+                            <RiNotification3Line size='30px' />
                         </div>
                     </div>
 
@@ -53,26 +186,59 @@ export function Inicio() {
                         <div className="flex justify-between items-right">
                             <div>
                                 <p className="font-bold text-black">Invitaciones</p>
-                                <p className="text-2xl text-black">40</p>
+                                <p className="text-3xl text-black">{invitaciones.length}</p>
                             </div>
-                            <BsChatLeft size='30px'/>
+                            <BsChatLeft size='30px' />
                         </div>
                     </div>
                 </div>
-
                 <div className="flex gap-10 flex-wrap justify-center">
                     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-780  ">
-                        <div className="flex justify-between">
+                        <div className="flex justify-between p-2">
                             <p className="font-semibold text-xl">Tareas para hoy</p>
                             <div className="flex items-center gap-4">
                             </div>
                         </div>
-                        {/* PONER LA LISTA DE TAREAS DE HOY */} <h1>HOLA</h1>
+                        <section>
+                            {tareasHoy.map((tarea) => (
+                                < Box
+                                    key={tarea.id}
+                                    bg="yellow.200"
+                                    p={1}
+                                    m={1}
+                                    borderRadius="lg"
+                                >
+                                    <Flex>
+                                        <Text fontSize="l">
+                                            <strong>Nombre</strong> :  {tarea.nombre}
+                                            <br></br>
+                                            <strong>Descripción</strong> : {tarea.descripcion}
+                                            <br></br>
+                                        </Text>
+                                        <Spacer />
+                                        <Text p={3}><strong>Estado:</strong></Text>
+                                        <Tag p={1} colorScheme="green" >
+                                            {tarea.estado}
+                                        </Tag>
+                                    </Flex>
+                                    <Flex align="center">
+                                        <HiCalendar />
+                                        <Text fontSize="l" ml={1} p={1.5} mr={6}>
+                                            <strong>Fecha Asignada: {tarea.fechaHoraAsignada.split("T")[0]} {tarea.fechaHoraAsignada.split("T")[1].split(":")[0]}:{tarea.fechaHoraAsignada.split("T")[1].split(":")[1]}</strong>
+                                        </Text>
+                                        <Spacer />
+                                        <Text mr={1} ><strong>Prioridad:</strong></Text>
+                                        <Tag p={2} ml={6} mr={8} colorScheme="red"  >
+                                            <text>{tarea.priorizacion}</text>
+                                        </Tag>
+                                    </Flex>
+                                </Box>
+                            ))}
+                        </section>
                     </div>
                     <div>
                         <div
                             className=" bg-white rounded-2xl md:w-400 p-4 m-3"
-
                         >
                             <div className="flex justify-between items-center ">
                                 <p className="font-semibold text-black text-2xl">Tareas</p>
@@ -82,18 +248,14 @@ export function Inicio() {
                                     <p className="text-black">ALGO</p>
                                 </div>
                             </div>
-
                             <div className="mt-4">
-
                             </div>
                         </div>
-
                         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl md:w-400 p-8 m-3 flex justify-center items-center gap-10">
                             <div>
                                 <p className="text-2xl font-semibold ">Tareas Terminadas</p>
-                                {/* <p className="text-gray-400">Yearly sales</p> */}
-                            </div>
 
+                            </div>
                             <div className="w-40">
                                 <CircularProgress value={valor} color='yellow' max={100} min={0} size='140px'>
                                     <CircularProgressLabel> {valor}% </CircularProgressLabel>
@@ -103,64 +265,102 @@ export function Inicio() {
                     </div>
                 </div>
 
-                <div className="flex gap-10 m-4 flex-wrap justify-center">
-                    <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl">
-                        <div className="flex justify-between items-center gap-2">
-                            <p className="text-xl font-semibold">Tareas por equipo</p>
-
-                        </div>
-                        <div className="mt-10 w-72 md:w-400">
-
-                            <div className="flex justify-between mt-4">
-                                <div className="flex gap-4">
-                                    <button
-                                        type="button"
-                                        className="text-2xl rounded-lg p-4 hover:drop-shadow-xl"
-                                    >
-                                    </button>
-                                    <div>
-                                        <p className="text-md font-semibold"></p>
-                                        <p className="text-sm text-gray-400"></p>
-                                    </div>
-                                </div>
-                                {/* <p className={`text-${item.pcColor}`}>{item.amount}</p> */}
+                <div className="flex gap-10 flex-wrap justify-center">
+                    <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-780  ">
+                        <div className="flex justify-between p-2">
+                            <p className="font-semibold text-xl">Tareas por equipos</p>
+                            <Select placeholder='Selecciona una opción' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
+                                onChange={(e) => setEquipoId(e.target.value)} >
+                                {equipos.map((equipo) => (
+                                    <option key={equipo.id} value={equipo.id}>{equipo.nombre}</option>
+                                ))}
+                            </Select>
+                            <div className="flex items-center gap-4">
                             </div>
-
                         </div>
-                        <div className="flex justify-between items-center mt-5 border-t-1 border-color">
+                        <section>
+                            {dato.map((item) => (
+                                < Box
+                                    key={item.id}
+                                    bg="yellow.200"
+                                    p={1}
+                                    m={1}
+                                    borderRadius="lg"
+                                >
+                                    <Flex>
+                                        <Text fontSize="l">
+                                            <strong>Nombre</strong> :  {item.nombre}
+                                            <br></br>
+                                            <strong>Descripción</strong> : {item.descripcion}
+                                            <br></br>
+                                        </Text>
+                                        <Spacer />
+                                        <Text p={3}><strong>Estado:</strong></Text>
+                                        <Tag p={1} colorScheme="green" >
+                                            {item.estado}
+                                        </Tag>
+                                    </Flex>
+                                    <Flex align="center">
+                                        <HiCalendar />
+                                        <Text fontSize="l" ml={1} p={1.5} mr={6}>
+                                            <strong>Fecha Asignada: {item.fechaHoraAsignada.split("T")[0]} {item.fechaHoraAsignada.split("T")[1].split(":")[0]}:{item.fechaHoraAsignada.split("T")[1].split(":")[1]}</strong>
+                                        </Text>
+                                        <Spacer />
+                                        <Text mr={1} ><strong>Prioridad:</strong></Text>
+                                        <Tag p={2} ml={6} mr={8} colorScheme="red"  >
+                                            <text>{item.priorizacion}</text>
+                                        </Tag>
+                                    </Flex>
+                                </Box>
+                            ))}
+                        </section>
+                        <div className="flex justify-between items-center mt-3 border-t-1 border-color">
                             <div className="mt-3">
-                                <Button
-                                    color="white"
-                                    text="Add"
-                                    borderRadius="10px"
-                                />
                             </div>
-
-                            <p className="text-gray-400 text-sm">36 Recent Transactions</p>
+                            <Button bg='yellow.200' p={4} ml={5} mr={6} top={2}
+                                onClick={() => TareasEquipo(equipoId)} >
+                                Ver Tareas
+                            </Button>
                         </div>
                     </div>
-                    <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
-                        <div className="flex justify-between items-center gap-2 mb-10">
-                            <p className="text-xl font-semibold">Tareas Inacabadas</p>
-                        </div>
-                        <div className="md:w-full overflow-auto">
+                    <div>
+                        <div
+                            className=" bg-white rounded-2xl md:w-400 p-4 m-3"
+                        >
+                            <div className="flex justify-between items-center ">
+                                <p className="font-semibold text-black text-2xl">Tareas</p>
 
+                                <div>
+                                    <p className="text-2xl text-black font-semibold mt-8">ALGO</p>
+                                    <p className="text-black">ALGO</p>
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                            </div>
+                        </div>
+                        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl md:w-400 p-8 m-3 flex justify-center items-center gap-10">
+                            <div>
+                                <p className="text-2xl font-semibold ">Tareas Terminadas</p>
+
+                            </div>
+                            <div className="w-40">
+                                <CircularProgress value={valor} color='yellow' max={100} min={0} size='140px'>
+                                    <CircularProgressLabel> {valor}% </CircularProgressLabel>
+                                </CircularProgress>
+                            </div>
                         </div>
                     </div>
                 </div>
-
                 <div className="flex flex-wrap justify-center">
                     <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
                         <div className="flex justify-between">
-                            <p className="text-xl font-semibold">Equipos</p>
+                            <p className="text-xl font-semibold">Estadísticas por Equipos</p>
                             <button type="button" className="text-xl font-semibold text-gray-400">
-                                <IoIosMore />
                             </button>
                         </div>
-
                         <div className="border-b-1 border-color pb-4 mt-2">
-                            <p className="text-md font-semibold mb-2">Nombre</p>
-
+                            <p className="text-md font-semibold mb-2">Compañero: {data.length} </p>
+                            <Progress colorScheme='yellow' height='32px' value={data.length} min={0} max={10} />
                             <div className="flex gap-4">
                                 <p
                                     className="cursor-pointer hover:drop-shadow-xl text-white py-0.5 px-3 rounded-lg text-xs"
@@ -169,51 +369,58 @@ export function Inicio() {
                             </div>
                         </div>
                         <div className="mt-2">
-                            <p className="text-md font-semibold mb-2">Administrador</p>
+                            <p className="text-md font-semibold mb-2">Administrador: {managers.length}</p>
+                            <Progress colorScheme='yellow' height='32px' value={managers.length} />
                             <div className="flex gap-4">
                             </div>
                         </div>
                         <div className="flex justify-between items-center mt-5 border-t-1 border-color">
                         </div>
                         <div className="mt-2">
-                            <p className="text-md font-semibold mb-2">Miembros</p>
+                            <p className="text-md font-semibold mb-2">Asociados: {asociados.length} </p>
+                            <Progress colorScheme='yellow' height='32px' value={asociados.length} />
                             <div className="flex gap-4">
                             </div>
-                            <div className="flex justify-between items-center mt-5 border-t-1 border-color">
+                            <div className="flex justify-between items-center mt-3 border-t-1 border-color">
+                                <div className="mt-3">
+                                </div>
+                                <Button bg='yellow.200' p={4} ml={5} mr={6} top={2}
+                                    onClick={() => {getEncontrarCompaneros(equipoId); encontrarManagers(equipoId); encontrarAsociados(equipoId)}} >
+                                    Ver
+                                </Button>
                             </div>
                         </div>
                     </div>
-
-                    <div className="md:w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
+                    <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
                         <div className="flex justify-between">
-                            <p className="text-xl font-semibold">Estadísticas de Equipo</p>
-                            <button type="button" className="text-xl font-semibold text-gray-500">
-                                <IoIosMore />
+                            <p className="text-xl font-semibold">Mis Estadísticas de equipos</p>
+                            <button type="button" className="text-xl font-semibold text-gray-400">
                             </button>
                         </div>
-
-                        <div className="mt-10 ">
-
-                            <div className="flex justify-between mt-4 w-full">
-                                <div className="flex gap-4">
-                                    <button
-                                        type="button"
-                                        className="text-2xl hover:drop-shadow-xl text-white rounded-full p-3"
-                                    >
-
-                                    </button>
-                                    <div>
-                                        <p className="text-md font-semibold"></p>
-                                        <p className="text-sm text-gray-400"></p>
-                                    </div>
-                                </div>
-
-                                {/* <p className={`text-${item.pcColor}`}>{item.amount}</p> */}
-                            </div>
-                            <div className="mt-4">
+                        <div className="mt-2">
+                            <p className="text-md font-semibold mb-2">Administrador: {equipos.length}</p>
+                            <Progress colorScheme='yellow' height='32px' value={20} />
+                            <div className="flex gap-4">
                             </div>
                         </div>
-
+                        <div className="flex justify-between items-center mt-5 border-t-1 border-color">
+                        </div>
+                        <div className="mt-2">
+                            <p className="text-md font-semibold mb-2">Asociados: 2 FALTA</p>
+                            <Progress colorScheme='yellow' height='32px' value={20} />
+                            <div className="flex gap-4">
+                            </div>
+                        </div>
+                        <div className="flex justify-between items-center mt-5 border-t-1 border-color">
+                        </div>
+                        <div className="mt-2">
+                            <p className="text-md font-semibold mb-2">Compañeros: 2 FALTA</p>
+                            <Progress colorScheme='yellow' height='32px' value={20} />
+                            <div className="flex gap-4">
+                            </div>
+                            <div className="flex justify-between items-center mt-3 border-t-1 border-color">
+                            </div>
+                        </div>
                     </div>
                     <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
                         <div className="flex justify-between">
