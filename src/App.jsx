@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
-import { FiSettings } from 'react-icons/fi';
 import { Tareas } from './components/Tareas';
 import { CrearTarea } from './components/CrearTarea';
 import { Navbar, Footer, Sidebar} from './components';
@@ -17,6 +16,7 @@ import { MisTareas } from './components/MisTareas';
 import { MisInvitaciones } from './components/MisInvitaciones';
 import { CrearInvitacion } from './components/CrearInvitacion';
 import { Inicio }  from './components/Inicio';
+import { ActualizarPerfil } from './components/ActualizarPerfil'
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = window.sessionStorage.getItem('jwt');
@@ -65,6 +65,7 @@ export function App() {
                 <Route path="/inicio" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Registro />} />
+                <Route path="/actualizarPerfil" element={<ProtectedRoute><ActualizarPerfil /></ProtectedRoute>} />
 
                 {/* Tareas */}
                 <Route path="/tareas" element={<ProtectedRoute> <Tareas /> </ProtectedRoute>} />
