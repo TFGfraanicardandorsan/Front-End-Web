@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { IoEyeSharp } from 'react-icons/io5'
 import { FaEyeSlash } from 'react-icons/fa'
 import { Link, NavLink } from 'react-router-dom';
+import  Header  from './Header'
 import useUser from '../hooks/useUser'
 
 export function Login() {
@@ -27,6 +28,9 @@ export function Login() {
 
     return (
         <>
+            <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
+                <Header />
+            </div>
             <Heading align="center" as="h1" size="2xl" m={4} >Login</Heading>
             < Box bg="yellow.200" p={4} m={4} borderRadius="lg" >
                 {isLoginLoading && <strong>Comprobando credenciales ...</strong>}
@@ -65,10 +69,10 @@ export function Login() {
                             </Button>
                         </button>
                         <Link to="/register">
-                                    <Text fontSize="xl" ml={2} mr={3}>
-                                        <strong>¿No tienes cuenta todavía? <i>Comienza ya.</i></strong>
-                                    </Text>
-                                </Link>
+                            <Text fontSize="xl" ml={2} mr={3}>
+                                <strong>¿No tienes cuenta todavía? <i>Comienza ya.</i></strong>
+                            </Text>
+                        </Link>
                     </form>
                 }
                 {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineMenu } from 'react-icons/ai';
-import { Box } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import { Notificaciones, Invitaciones, UserProfile } from '.';
 import { useStateContext } from "../contents/ContextProvider";
 
@@ -44,7 +44,12 @@ const Header = () => {
             <div className="flex">
                 <Box>
                     <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg">
-                        <h1>INICIAR SESIÓN</h1>
+                        <Button colorScheme='black' bg='yellow.200' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>
+                            Iniciar Sesión
+                        </Button>
+                        <Button colorScheme='black'  bg='yellow.200' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>
+                            Registrarse
+                        </Button>
                     </div>
                 </Box>
             </div>

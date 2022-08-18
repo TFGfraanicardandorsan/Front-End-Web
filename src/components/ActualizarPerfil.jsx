@@ -1,12 +1,5 @@
-import { useState, useEffect } from 'react';
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
-import { IoEyeSharp } from 'react-icons/io5'
-import { FaEyeSlash } from 'react-icons/fa'
-import "react-datepicker/dist/react-datepicker.css";
-import es from 'date-fns/locale/es';
-registerLocale('es', es)
-import { Heading, FormControl, FormLabel, Input, Box, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
-
+import { useState } from 'react';
+import { Heading, FormControl, FormLabel, Input, Box, InputGroup, Button } from '@chakra-ui/react'
 
 export function ActualizarPerfil() {
 

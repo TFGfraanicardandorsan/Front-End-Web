@@ -3,7 +3,7 @@ import './App.css'
 import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import { Tareas } from './components/Tareas';
 import { CrearTarea } from './components/CrearTarea';
-import { Navbar, Footer, Sidebar} from './components';
+import { Navbar, Footer, Sidebar } from './components';
 import CookieConsent from 'react-cookie-consent';
 import { UserContextProvider } from './contents/UserContext';
 import { useStateContext } from './contents/ContextProvider';
@@ -15,8 +15,9 @@ import { Registro } from './components/Registro';
 import { MisTareas } from './components/MisTareas';
 import { MisInvitaciones } from './components/MisInvitaciones';
 import { CrearInvitacion } from './components/CrearInvitacion';
-import { Inicio }  from './components/Inicio';
+import { Inicio } from './components/Inicio';
 import { ActualizarPerfil } from './components/ActualizarPerfil'
+import { Presentacion } from './components/Presentacion';
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = window.sessionStorage.getItem('jwt');
@@ -61,7 +62,9 @@ export function App() {
                 buttonText="Acepto"
               >
                 Este sitio usa cookies. Puedes ver nuestra <a href='/privacy'> <strong><u>política de privacidad</u></strong></a> para más</CookieConsent>
+
               <Routes>
+                <Route path="/" element={<Presentacion />} />
                 <Route path="/inicio" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Registro />} />
@@ -82,7 +85,7 @@ export function App() {
                 <Route path="/nuevainvitacion" element={<ProtectedRoute><CrearInvitacion /></ProtectedRoute>} />
               </Routes>
             </div>
-          </div>        
+          </div>
         </div>
       </div>
       <Footer />
