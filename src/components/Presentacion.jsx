@@ -3,32 +3,31 @@ import Header from './Header'
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { AnnotationIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/react/outline'
-
+import { AnnotationIcon,UserGroupIcon, DocumentTextIcon, ClipboardListIcon } from '@heroicons/react/outline'
 
 const features = [
     {
-        name: 'Competitive exchange rates',
+        name: 'Creación de tareas óptimas',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-        icon: GlobeAltIcon,
+            'Gracias a nuestro algoritmo de asignación de tareas, la realización de las tareas se repartirán en función de la jornada laboral.',
+        icon:  DocumentTextIcon,
     },
     {
-        name: 'No hidden fees',
+        name: 'Creación de equipos',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-        icon: ScaleIcon,
+            'Prentendemos crear conexiones fluidas entre los miembros de los equipos.',
+        icon:  UserGroupIcon,
     },
     {
-        name: 'Transfers are instant',
+        name: 'Gestión de las tareas',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-        icon: LightningBoltIcon,
+            'Los usuarios podrán consultar las tareas de hoy, así como el progreso de las mismas en el panel principal.',
+        icon: ClipboardListIcon,
     },
     {
-        name: 'Mobile notifications',
+        name: 'Notificaciones e Invitaciones',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+            'Se dispone de una funcionalidad para ver las invitaciones de equipo, así como las notificaciones que nos envíen.',
         icon: AnnotationIcon,
     },
 ]
@@ -98,7 +97,7 @@ export function Presentacion() {
                                         </div>
                                         <a
                                             href="#"
-                                            className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
+                                            className="block w-full px-5 py-3 text-center font-medium text-yellow-200 bg-gray-50 hover:bg-gray-100"
                                         >
                                         </a>
                                     </div>
@@ -109,30 +108,29 @@ export function Presentacion() {
                         <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                             <div className="sm:text-center lg:text-left">
                                 <h1 className="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl sm:tracking-tight md:text-6xl md:tracking-tight">
-                                    <span className="block xl:inline">Data to enrich your</span>{' '}
-                                    <span className="block text-indigo-600 xl:inline">online business</span>
+                                    <span className="block xl:inline">Comienza a optimizar la</span>{' '}
+                                    <span className="block text-yellow-200 xl:inline">planificación de tus tareas </span>
                                 </h1>
                                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-                                    fugiat veniam occaecat fugiat aliqua.
+                                    Queremos aportar nuestro granito de arena para ayudar a mejorar la planificación de tareas
                                 </p>
                                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                    <div className="rounded-md shadow">
+                                    {/* <div className="rounded-md shadow">
                                         <a
                                             href="#"
-                                            className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+                                            className="w-full flex items-center justify-center px-8 py-3 border border-black text-base font-medium rounded-md text-black bg-yellow-200  md:py-4 md:text-lg md:px-10"
                                         >
-                                            Get started
+                                            Empieza ya
                                         </a>
-                                    </div>
-                                    <div className="mt-3 sm:mt-0 sm:ml-3">
+                                    </div> */}
+                                    {/* <div className="mt-3 sm:mt-0 sm:ml-3">
                                         <a
                                             href="#"
                                             className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
                                         >
                                             Live demo
                                         </a>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </main>
@@ -152,13 +150,12 @@ export function Presentacion() {
             <div className="py-12 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="lg:text-center">
-                        <h2 className="text-lg text-indigo-600 font-semibold">Transactions</h2>
+                        <h2 className="text-lg text-yellow-200 font-semibold">T-Planifica</h2>
                         <p className="mt-2 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl sm:tracking-tight">
-                            A better way to send money
+                           ¿Cuáles son nuestros objetivos?
                         </p>
                         <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
-                            accusamus quisquam.
+                           Para cumplir con las expectativas de nuestros clientes contamos con los siguientes servicios.
                         </p>
                     </div>
 
@@ -167,7 +164,7 @@ export function Presentacion() {
                             {features.map((feature) => (
                                 <div key={feature.name} className="relative">
                                     <dt>
-                                        <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                        <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-yellow-200 text-black">
                                             <feature.icon className="h-6 w-6" aria-hidden="true" />
                                         </div>
                                         <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{feature.name}</p>

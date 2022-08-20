@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { AiOutlineMenu } from 'react-icons/ai';
 import { Box, Button } from '@chakra-ui/react';
-import { Notificaciones, Invitaciones, UserProfile } from '.';
+import { Link } from 'react-router-dom';
 import { useStateContext } from "../contents/ContextProvider";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
@@ -44,12 +44,16 @@ const Header = () => {
             <div className="flex">
                 <Box>
                     <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg">
-                        <Button colorScheme='black' bg='yellow.200' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>
-                            Iniciar Sesión
-                        </Button>
-                        <Button colorScheme='black'  bg='yellow.200' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>
-                            Registrarse
-                        </Button>
+                        <Link to='/login' >
+                            <Button colorScheme='black' bg='yellow.200' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>
+                                Iniciar Sesión
+                            </Button>
+                        </Link>
+                        <Link to='/register' >
+                            <Button colorScheme='black' bg='yellow.200' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>
+                                Registrarse
+                            </Button>
+                        </Link>
                     </div>
                 </Box>
             </div>
