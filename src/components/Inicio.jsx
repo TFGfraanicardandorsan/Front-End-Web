@@ -288,7 +288,7 @@ export function Inicio() {
                                 <p className="font-semibold text-black text-2xl">Tareas en proceso: </p>
                             </div>
                             <div className="mt-4">
-                                <Progress colorScheme='yellow' height='32px' value={tarea.length} min={0} max={tareasHoy.length} />
+                                <Progress colorScheme='yellow' height='32px' value={tareasEnProceso.length} min={0} max={tareasHoy.length} />
                             </div>
                         </div>
                     </div>
