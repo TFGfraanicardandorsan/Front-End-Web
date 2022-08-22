@@ -1,29 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Heading, FormControl, FormLabel, Input, Box, InputGroup, Button } from '@chakra-ui/react'
+import * as API from '../services/usuarios'
+import Navbar from './Navbar';
 
 export function ActualizarPerfil() {
 
-    const API_URL = 'https://t-planifica.herokuapp.com'
+    const [usuarios, setUsuarios] = useState([])
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [nombre, setNombre] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [email, setEmail] = useState('');
 
+    useEffect(() => {
+        API.getMisDatos().then(setUsuarios);
+    }, []);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const perfil = { username, password, nombre, apellidos, email };
         const jwt = window.sessionStorage.getItem('jwt');
         fetch('https://t-planifica.herokuapp.com/actualizarPerfil', {
             method: 'POST',
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${jwt}` },
-            body: JSON.stringify(perfil)
+            body: JSON.stringify({ id: usuarios.id, username, password, nombre, apellidos, email })
         }).then(() => {
             alert("Se ha actualizado el perfil correctamente")
         })
     }
+
     return (
         <>
+            <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
+                <Navbar />
+            </div>
             <Heading align="center" as="h1" size="2xl" m={4} >Actualizar Perfil</Heading>
             < Box bg="yellow.200" p={4} m={4} borderRadius="lg" >
                 <form onSubmit={handleSubmit}>
