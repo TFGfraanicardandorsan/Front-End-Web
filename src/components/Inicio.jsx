@@ -258,7 +258,9 @@ export function Inicio() {
                                     <Flex align="center">
                                         <HiCalendar />
                                         <Text fontSize="l" ml={1} p={1.5} mr={6}>
-                                            <strong>Fecha Asignada: {tarea.fechaHoraAsignada.split("T")[0]} {tarea.fechaHoraAsignada.split("T")[1].split(":")[0]}:{tarea.fechaHoraAsignada.split("T")[1].split(":")[1]}</strong>
+                                            <strong>Fecha Asignada: {tarea.fechaHoraFinalizada == null ? 'No ha sido asignada una hora todavía' : tarea.fechaHoraAsignada.split("T")[0]
+                                            + tarea.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + tarea.fechaHoraAsignada.split("T")[1].split(":")[1] }
+                                                </strong>
                                         </Text>
                                         <Spacer />
                                         <Text mr={1} ><strong>Prioridad:</strong></Text>
@@ -332,7 +334,9 @@ export function Inicio() {
                                     <Flex align="center">
                                         <HiCalendar />
                                         <Text fontSize="l" ml={1} p={1.5} mr={6}>
-                                            <strong>Fecha Asignada: {item.fechaHoraAsignada.split("T")[0]} {item.fechaHoraAsignada.split("T")[1].split(":")[0]}:{item.fechaHoraAsignada.split("T")[1].split(":")[1]}</strong>
+                                        <strong>Fecha Asignada: {item.fechaHoraFinalizada == null ? 'No ha sido asignada una hora todavía' : item.fechaHoraAsignada.split("T")[0]
+                                            + item.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + item.fechaHoraAsignada.split("T")[1].split(":")[1] }
+                                                </strong>
                                         </Text>
                                         <Spacer />
                                         <Text mr={1} ><strong>Prioridad:</strong></Text>
@@ -440,8 +444,7 @@ export function Inicio() {
                                     <Progress colorScheme='yellow' height='32px' value={data.length} min={0} max={10} />
                                     <div className="flex gap-4">
                                         <p
-                                            className="cursor-pointer hover:drop-shadow-xl text-white py-0.5 px-3 rounded-lg text-xs"
-                                        >
+                                            className="cursor-pointer hover:drop-shadow-xl text-white py-0.5 px-3 rounded-lg text-xs">
                                         </p>
                                     </div>
                                 </div>

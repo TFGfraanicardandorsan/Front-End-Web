@@ -39,7 +39,6 @@ export function Presentacion() {
             <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
                 <Header />
             </div>
-
             <div className="relative bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
@@ -115,22 +114,6 @@ export function Presentacion() {
                                     Queremos aportar nuestro granito de arena para ayudar a mejorar la planificación de tareas
                                 </p>
                                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                    {/* <div className="rounded-md shadow">
-                                        <a
-                                            href="#"
-                                            className="w-full flex items-center justify-center px-8 py-3 border border-black text-base font-medium rounded-md text-black bg-yellow-200  md:py-4 md:text-lg md:px-10"
-                                        >
-                                            Empieza ya
-                                        </a>
-                                    </div> */}
-                                    {/* <div className="mt-3 sm:mt-0 sm:ml-3">
-                                        <a
-                                            href="#"
-                                            className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
-                                        >
-                                            Live demo
-                                        </a>
-                                    </div> */}
                                 </div>
                             </div>
                         </main>
@@ -139,14 +122,13 @@ export function Presentacion() {
                 <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
                     <img
                         className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-                        alt=""
+                        src="src\assets\dashboard.png"
+                        alt="Imagen inicio"
                     />
                 </div>
             </div>
 
-            <hr class=" border-gray-200 sm:mx-auto dark:border-gray-700 " />
-
+            <hr className=" border-gray-200 sm:mx-auto dark:border-gray-700 " />
             <div className="py-12 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="lg:text-center">

@@ -40,7 +40,7 @@ module.exports = {
       },
       backgroundImage: {
         'hero-pattern':
-          "url('https://fotografias.lasexta.com/clipping/cmsimages01/2019/05/13/FF08F5EC-DBB2-4354-B6BC-F8F4EEE642BF/98.jpg?crop=1300,731,x0,y19&width=1900&height=1069&optimize=high&format=webply')",
+        "url('/src/assets/dashboard.png')",
       },
     },
   },
