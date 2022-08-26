@@ -16,8 +16,15 @@ export function CrearTarea() {
     const [fechaFin, setFechaFin] = useState('');
     const [duracion, setDuracion] = useState('');
     const [priorizacion, setPriorizacion] = useState('');
-    const [terminada, setTerminada] = useState(false);
-    // const [estado, setEstado] = useState('');
+
+    const tareaCreada = () => {
+        swal ({
+            title: "Tarea creada satisfactoriamente",                   
+            text : "Se ha creado la tarea " + nombre,
+            icon: "success",
+            button: "Aceptar"
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,7 +40,7 @@ export function CrearTarea() {
             body: JSON.stringify(tarea)
 
         }).then(() => {
-            alert("Se ha creado la tarea")
+            tareaCreada()
         })
     }
 
@@ -113,6 +120,7 @@ export function CrearTarea() {
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
+                            <option>4</option>
                         </Select>
                     </FormControl>
                     <br /> <br />

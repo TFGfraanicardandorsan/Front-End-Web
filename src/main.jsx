@@ -1,13 +1,17 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client';
+import {StrictMode} from 'react';
 import { BrowserRouter } from "react-router-dom";
 import  { ChakraProvider } from '@chakra-ui/react';
 import {App} from './App'
 import './index.css'
 import { ContextProvider } from './contents/ContextProvider'
 
-ReactDOM.render(
-  <React.StrictMode>
+
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+root.render(
+<StrictMode>
     <ChakraProvider>
       <BrowserRouter>
       <ContextProvider>
@@ -15,6 +19,5 @@ ReactDOM.render(
       </ContextProvider>
       </BrowserRouter>   
     </ChakraProvider>  
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+  </StrictMode>
+);

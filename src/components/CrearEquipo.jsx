@@ -3,6 +3,7 @@ import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from 'date-fns/locale/es';
 registerLocale('es', es)
+import swal from 'sweetalert'
 import Navbar from './Navbar';
 import {
     Heading, FormControl, FormLabel, Input, Box, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
@@ -11,6 +12,15 @@ import {
 
 export function CrearEquipo() {
     const [nombre, setNombre] = useState('');
+
+    const mostrarAlerta = () => {
+        swal ({
+            title: "Se ha creado el equipo",
+            text : "Equipo creado satisfactoriamente",
+            icon: "success",
+            button: "Aceptar"
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,9 +34,8 @@ export function CrearEquipo() {
                 "Authorization": `Bearer ${jwt}`
             },
             body: JSON.stringify(equipo)
-
         }).then(() => {
-            alert("Se ha creado el equipo")
+            mostrarAlerta()
         })
     }
 
