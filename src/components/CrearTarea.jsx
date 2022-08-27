@@ -16,6 +16,7 @@ export function CrearTarea() {
     const [fechaFin, setFechaFin] = useState('');
     const [duracion, setDuracion] = useState('');
     const [priorizacion, setPriorizacion] = useState('');
+    const limite = new Date().toISOString().split("T")[0].toString();
 
     const tareaCreada = () => {
         swal ({
@@ -75,6 +76,7 @@ export function CrearTarea() {
                         <FormLabel> Fecha Inicio </FormLabel>
                         <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
                             type="date"
+                            min = {limite}
                             value={fechaInicio}
                             onChange={(fecha) => setFechaInicio(fecha.target.value)}
                         />
@@ -84,6 +86,7 @@ export function CrearTarea() {
                         <FormLabel> Fecha Fin </FormLabel>
                         <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
                             type="date"
+                            min = {limite}
                             value={fechaFin}
                             onChange={(fecha) => setFechaFin(fecha.target.value)}
                         />
