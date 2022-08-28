@@ -78,7 +78,7 @@ const Sidebar = () => {
                                 <GoTasklist />
                                 <Link to="/mistareas">
                                     <Text fontSize="xl" ml={2} mr={3}>
-                                        <strong>Mis Tareas</strong>
+                                        <strong>Asignadas</strong>
                                     </Text>
                                 </Link>
                             </Button>
@@ -119,6 +119,16 @@ const Sidebar = () => {
                                 <Link to="/misEquipos">
                                     <Text fontSize="xl" ml={2} mr={3}>
                                         <strong>Mis Equipos</strong>
+                                    </Text>
+                                </Link>
+                            </Button>
+                        </Flex>
+                        <Flex align='center' fontSize={15}>
+                            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}>
+                                <RiTeamLine />
+                                <Link to="/administrados">
+                                    <Text fontSize="xl" ml={2} mr={3}>
+                                        <strong>Administrados</strong>
                                     </Text>
                                 </Link>
                             </Button>

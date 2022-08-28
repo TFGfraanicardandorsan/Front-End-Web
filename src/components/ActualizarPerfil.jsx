@@ -11,6 +11,8 @@ export function ActualizarPerfil() {
     const [nombre, setNombre] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [email, setEmail] = useState('');
+    const [horaInicioTrabajar, setHoraInicioTrabajar] = useState('');
+    const [horaFinTrabajar, setHoraFinTrabajar] = useState('');
 
     useEffect(() => {
         API.getMisDatos().then(setUsuarios);
@@ -22,7 +24,7 @@ export function ActualizarPerfil() {
         fetch('https://t-planifica.herokuapp.com/actualizarPerfil', {
             method: 'POST',
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${jwt}` },
-            body: JSON.stringify({ id: usuarios.id, username, password, nombre, apellidos, email })
+            body: JSON.stringify({ id: usuarios.id, username, password, nombre, apellidos, email, horaInicioTrabajar, horaFinTrabajar })
         }).then(() => {
             alert("Se ha actualizado el perfil correctamente")
         })
@@ -36,7 +38,7 @@ export function ActualizarPerfil() {
             <Heading align="center" as="h1" size="2xl" m={4} >Actualizar Perfil</Heading>
             < Box bg="yellow.200" p={4} m={4} borderRadius="lg" >
                 <form onSubmit={handleSubmit}>
-                    <FormControl  >
+                    <FormControl isRequired  >
                         <FormLabel> Usuario </FormLabel>
                         <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' placeholder='Usuario' bg='yellow.200'
                             type="text"
@@ -45,7 +47,7 @@ export function ActualizarPerfil() {
                         />
                     </FormControl>
                     <br></br>
-                    <FormControl  >
+                    <FormControl isRequired >
                         <FormLabel> Contraseña </FormLabel>
                         <InputGroup size='md'>
                             <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200' placeholder='Contraseña'
@@ -56,7 +58,7 @@ export function ActualizarPerfil() {
                         </InputGroup>
                     </FormControl>
                     <br></br>
-                    <FormControl  >
+                    <FormControl isRequired >
                         <FormLabel> Nombre </FormLabel>
                         <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' placeholder='Nombre' bg='yellow.200'
                             type="text"
@@ -65,7 +67,7 @@ export function ActualizarPerfil() {
                         />
                     </FormControl>
                     <br></br>
-                    <FormControl  >
+                    <FormControl isRequired >
                         <FormLabel> Apellidos </FormLabel>
                         <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' placeholder='Apellidos' bg='yellow.200'
                             type="text"
@@ -74,12 +76,29 @@ export function ActualizarPerfil() {
                         />
                     </FormControl>
                     <br></br>
-                    <FormControl  >
+                    <FormControl isRequired >
                         <FormLabel> Email </FormLabel>
                         <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' placeholder='Email' bg='yellow.200'
                             type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </FormControl>
+                    <FormControl isRequired >
+                        <FormLabel> Hora inicio </FormLabel>
+                        <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
+                            type="time"
+                            value={horaInicioTrabajar}
+                            onChange={(hora) => setHoraInicioTrabajar(hora.target.value)}
+                        />
+                    </FormControl>
+                    <br></br>
+                    <FormControl isRequired >
+                        <FormLabel> Hora finalización </FormLabel>
+                        <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
+                            type="time"
+                            value={horaFinTrabajar}
+                            onChange={(hora) => setHoraFinTrabajar(hora.target.value)}
                         />
                     </FormControl>
                     <br></br>

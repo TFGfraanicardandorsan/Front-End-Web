@@ -378,7 +378,7 @@ export function Inicio() {
                             </div>
 
                             <div className="mt-2">
-                                <p className="text-md font-semibold mb-2">Soy administrador de: {equipos.length} Equipos</p>
+                                <p className="text-md font-semibold mb-2">Soy mánager de: {equipos.length} Equipos</p>
                                 <Progress colorScheme='yellow' height='32px' value={20} />
                                 <div className="flex justify-between items-center mt-5 border-t-1 border-color"></div>
                                 <p className="text-md font-semibold mb-2">Pertenezco a: {misEquipos.length} Equipos</p>
@@ -449,7 +449,7 @@ export function Inicio() {
                                     </div>
                                 </div>
                                 <div className="mt-2">
-                                    <p className="text-md font-semibold mb-2">Administrador: {managers.length}</p>
+                                    <p className="text-md font-semibold mb-2">Mánager: {managers.length}</p>
                                     <Progress colorScheme='yellow' height='32px' value={managers.length} />
                                     <div className="flex gap-4">
                                     </div>

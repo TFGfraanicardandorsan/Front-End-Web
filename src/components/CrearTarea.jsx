@@ -17,6 +17,7 @@ export function CrearTarea() {
     const [duracion, setDuracion] = useState('');
     const [priorizacion, setPriorizacion] = useState('');
     const limite = new Date().toISOString().split("T")[0].toString();
+    
 
     const tareaCreada = () => {
         swal ({

@@ -1,24 +1,29 @@
 import { useState, useEffect } from "react";
+import { HiOutlineX } from "react-icons/hi";
+import { BsJournalCheck } from "react-icons/bs";
 import {
-  Box, Flex, Text, Spacer, Heading, Button, Popover,PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,PopoverArrow,
-PopoverCloseButton, Portal } from "@chakra-ui/react"
+  Select, Box, Flex, Text, Spacer, Heading, Button, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverArrow,
+  PopoverCloseButton, Portal
+} from "@chakra-ui/react"
 import { RiUserSearchFill } from "react-icons/ri"
 import * as API from "../services/equipos";
 import * as APP from "../services/usuarios";
 import Navbar from './Navbar';
 
 
-export function MisEquipos() {
+export function AdministrarEquipo() {
 
   const API_URL = 'https://t-planifica.herokuapp.com'
   const [equipos, setEquipos] = useState([]);
   const [data, setData] = useState([]);
   const [managers, setManagers] = useState([]);
+  const [managerId, setManagerId] = useState([])
   const [asociados, setAsociados] = useState([])
+  const [asociadoId, setAsociadoId] = useState([])
   const [usuario, setUsuario] = useState([]);
 
   useEffect(() => {
-    API.getMisEquipos().then(setEquipos);
+    API.getEquiposAdministrados().then(setEquipos);
   }, []);
 
   useEffect(() => {
@@ -151,7 +156,7 @@ export function MisEquipos() {
         <Navbar />
       </div>
       <Heading align="center" as="h1" size="2xl" m={4} >
-        Mis Equipos
+        Administración de Equipos
       </Heading>
       <section>
         {equipos.map((equipo) => (
@@ -232,6 +237,39 @@ export function MisEquipos() {
                   </PopoverContent>
                 </Portal>
               </Popover>
+            </Flex>
+            <Spacer />
+            <Flex align="center" mr={8}>
+              <Text fontSize="xl">
+                <Select placeholder='Selecciona una opción' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
+                  onClick={() => encontrarAsociados(equipo.id)}
+                  onChange={(e) => setAsociadoId(e.target.value)} >
+                  {asociados.map((asociado) => (
+                    <option key={asociado.id} value={asociado.id}>{asociado.nombre} {asociado.apellidos}</option>
+                  ))}
+                </Select>
+              </Text>
+
+              <Button colorScheme='transparent' textColor='black' p={4} mr={3}
+                onClick={() => ascenderManager(equipo.id, asociadoId)} >
+                <font size="5"><BsJournalCheck /></font>
+                <p> Ascender a Manager </p>
+              </Button>
+
+              <Text fontSize="xl">
+                <Select placeholder='Selecciona una opción' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
+                  onClick={() => encontrarManagers(equipo.id)}
+                  onChange={(e) => setManagerId(e.target.value)} >
+                  {managers.map((manager) => (
+                    <option key={manager.id} value={manager.id}>{manager.nombre} {manager.apellidos}</option>
+                  ))}
+                </Select>
+              </Text>
+              <Button colorScheme='transparent' textColor='black' p={4} mr={3} 
+                onClick={() => descenderManager(equipo.id, managerId)} >
+                <font size="5"> <HiOutlineX /></font>
+                <p> Volver Asociado </p>
+              </Button>
             </Flex>
           </Box>
         ))}

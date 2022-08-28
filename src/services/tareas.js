@@ -10,7 +10,6 @@ export async function getAllTareas() {
     }
 }
 
-
 export async function getMisTareasAsignadasInacabadas() {
     const jwt = window.sessionStorage.getItem('jwt');
     const myHeader = new Headers({
@@ -27,9 +26,8 @@ export async function getMisTareasAsignadasInacabadas() {
     const myRequest = new Request(`${API_URL}/misTareasAsignadasUnfinished`, myInit);
     try {
         const response = await fetch(myRequest)
-        return await response.json();
+        return (response.status == 200 ?  await response.json() : [])
     } catch (error){
-        console.error(error);
     }
 }
 
