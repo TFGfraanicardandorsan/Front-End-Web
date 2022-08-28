@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { IoEyeSharp } from 'react-icons/io5'
 import { FaEyeSlash } from 'react-icons/fa'
+import { Link } from 'react-router-dom';
 import { Heading, FormControl, FormLabel, Input, Box, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
-import  Header  from './Header'
+import Header from './Header'
 
 export function Registro() {
     const [username, setUsername] = useState('');
@@ -10,19 +11,31 @@ export function Registro() {
     const [nombre, setNombre] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [email, setEmail] = useState('');
+    const [horaInicioTrabajar, setHoraInicioTrabajar] = useState('');
+    const [horaFinTrabajar, setHoraFinTrabajar] = useState('');
     const [show, setShow] = useState('');
+
+    const avisoRegistro = () => {
+        swal ({
+            title: "Se ha registrado satisfactoriamente",                   
+            text : "Se ha registrado el usuario " + nombre,
+            icon: "success",
+            button: "Aceptar"
+        })
+    }
+
     const handleClick = () => setShow(!show);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const registro = { username, password, nombre, apellidos, email };
+        const registro = { username, password, nombre, apellidos, email, horaInicioTrabajar, horaFinTrabajar };
         fetch('https://t-planifica.herokuapp.com/register', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(registro)
         }).then(() => {
-            alert("Se ha registrado correctamente")
+            avisoRegistro()
         })
     }
 
@@ -88,10 +101,32 @@ export function Registro() {
                         />
                     </FormControl>
                     <br></br>
+                    <FormControl isRequired >
+                        <FormLabel> Hora inicio </FormLabel>
+                        <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
+                            type="time"
+                            value={horaInicioTrabajar}
+                            onChange={(hora) => setHoraInicioTrabajar(hora.target.value)}
+                        />
+                    </FormControl>
+                    <br></br>
+                    <FormControl isRequired >
+                        <FormLabel> Hora finalización </FormLabel>
+                        <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
+                            type="time"
+                            value={horaFinTrabajar}
+                            onChange={(hora) => setHoraFinTrabajar(hora.target.value)}
+                        />
+                        <span class="validity"></span>
+                    </FormControl>
+                    <br></br> 
                     <button>
+                        {/* <Link to='/login' > */}
                         <Button colorScheme='black' variant='outline' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg'>
                             Registrarse
-                        </Button>
+                       </Button>
+
+                        {/* </Link>  */}
                     </button>
                 </form>
             </Box>

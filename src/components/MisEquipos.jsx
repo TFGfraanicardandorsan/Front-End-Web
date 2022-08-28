@@ -196,8 +196,6 @@ export function MisEquipos() {
                 <br></br>
                 <strong>Hora de Finalizción de Trabajo</strong> : {equipo.creador.horaFinTrabajar}
                 <br></br>
-                <strong>Equipo</strong> : {equipo.creador.equipo}
-                <br></br>
                 <strong>Asociados</strong> : {equipo.asociados.map((item, i) => (
                   <text key={i}>
                     {item.nombre} {item.apellidos} ;

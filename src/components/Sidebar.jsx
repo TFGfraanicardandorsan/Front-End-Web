@@ -66,6 +66,16 @@ const Sidebar = () => {
                         <Flex align='center' fontSize={15}>
                             <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}>
                                 <GoTasklist />
+                                <Link to="/asignarTareas">
+                                    <Text fontSize="xl" ml={2} mr={3}>
+                                        <strong>Asignar Tareas</strong>
+                                    </Text>
+                                </Link>
+                            </Button>
+                        </Flex>
+                        <Flex align='center' fontSize={15}>
+                            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}>
+                                <GoTasklist />
                                 <Link to="/mistareas">
                                     <Text fontSize="xl" ml={2} mr={3}>
                                         <strong>Mis Tareas</strong>

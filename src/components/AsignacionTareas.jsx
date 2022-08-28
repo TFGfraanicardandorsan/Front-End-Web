@@ -3,13 +3,13 @@ import { HiCalendar, HiClock, HiOutlinePause } from "react-icons/hi";
 import { MdOutlineAutoDelete, MdOutlineNotStarted } from "react-icons/md"
 import { AiOutlineFileDone } from "react-icons/ai"
 import { BsClipboardPlus, BsPersonPlus } from "react-icons/bs"
-import { Box, Flex, Text, Spacer, Tag, Button, Heading, Image, Select } from "@chakra-ui/react"
+import { Box, Flex, Text, Spacer, Tag, Button, Heading, Select } from "@chakra-ui/react"
 import * as API from "../services/tareas";
 import Navbar from './Navbar';
 import * as APP from '../services/equipos'
 import * as AP from '../services/usuarios'
 
-export function Tareas() {
+export function AsignacionTareas() {
 
   const API_URL = 'https://t-planifica.herokuapp.com'
   const [tareas, setTareas] = useState([]);
@@ -24,10 +24,6 @@ export function Tareas() {
 
   useEffect(() => {
     APP.getEquiposAdministrados().then(setEquipos);
-  }, [])
-
-  useEffect(() => {
-    AP.getMisDatos().then(setUsuario);
   }, [])
 
   async function getEncontrarCompaneros(equipoId) {
@@ -191,7 +187,7 @@ export function Tareas() {
       </div>
 
       <Heading align="center" as="h1" size="2xl" m={4} >
-        Tareas
+        Asignación de Tareas
       </Heading>
 
 
@@ -200,17 +196,18 @@ export function Tareas() {
           < Box
             key={tarea.id}
             bg="yellow.200"
-            p={2}
-            m={2}
+            p={4}
+            m={4}
             borderRadius="lg"
           >
             <Flex>
               <Text fontSize="xl">
-                <strong>Nombre: </strong>   {tarea.nombre}
+                <strong>Nombre</strong> :  {tarea.nombre}
                 <br></br>
-                <strong>Descripción:</strong>  {tarea.descripcion}
+                <strong>Descripción</strong> : {tarea.descripcion}
               </Text>
               <Spacer />
+              
               <Tag p={3} colorScheme="yellow.200" >
               <Text fontSize="xl" mr={1} >
               <strong>Estado:</strong>
@@ -219,29 +216,44 @@ export function Tareas() {
               <Tag p={3} colorScheme="green" >
                 {tarea.estado}
               </Tag>
-
+              
             </Flex>
             <Flex align="center">
-              <HiCalendar />
-              <Text fontSize="lg" ml={1} top={5}  mr={6}>
-                <strong> Fecha Inicio: {tarea.fechaInicio}</strong>
+            <HiCalendar />
+              <Text fontSize="lg" ml={1} p={2} mr={6}>
+              <strong>Fecha Asignada: {tarea.fechaHoraAsignada == null ? 'No ha sido asignada una hora todavía' : tarea.fechaHoraAsignada.split("T")[0]
+                                                + tarea.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + tarea.fechaHoraAsignada.split("T")[1].split(":")[1]}
+                                            </strong>
               </Text>
 
-              <HiCalendar />
-              <Text fontSize="lg" ml={2} mr={5}>
-                <strong>Fecha Fin: {tarea.fechaFin}</strong>
+              <Text fontSize="xl">
+                <Select placeholder='Selecciona una opción' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200'
+                  onChange={(e) => setEquipoId(e.target.value)} >
+                  {equipos.map((equipo) => (
+                    <option key={equipo.id} value={equipo.id}>{equipo.nombre}</option>
+                  ))}
+                </Select>
               </Text>
+              <Button colorScheme='transparent' textColor='black' p={4} mr={3}
+                onClick={() => asignarTareaEquipo(tarea.id, equipoId)} >
+                <font size="5">< BsClipboardPlus /></font>
+                <p> Asignar Equipo </p>
+              </Button>
 
-              <HiClock />
-              <Text fontSize="lg" ml={2} mr={5}>
-                <strong>Duración: {tarea.duracion}</strong>
+              <Text fontSize="xl">
+                <Select placeholder='Selecciona una opción' borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' bg='yellow.200' ml={2}
+                  onClick={() => getEncontrarCompaneros(equipoId)}
+                  onChange={(e) => setUsuario(e.target.value)}>
+                  {usuarioId.map((usuarios) => (
+                    <option key={usuarios.id} value={usuarios.id}>{usuarios.nombre}</option>
+                  ))}
+                </Select>
               </Text>
-
-              <Text fontSize="lg" ml={2} mr={5}></Text>
-              <strong>Prioridad: </strong>
-              <Tag p={4} ml={3} colorScheme={tarea.priorizacion == 1 ? "red" : "blue"} >
-                {tarea.priorizacion == 1 ? tarea.priorizacion : tarea.priorizacion}
-              </Tag>
+              <Button colorScheme='transparent' textColor='black' p={4} mr={3}
+                onClick={() => asignarTareaUsuario(tarea.id, usuario)} >
+                <font size="5"> <BsPersonPlus /> </font>
+                <p> Asignar Usuario </p>
+              </Button>
             </Flex>
           </Box>
         ))}

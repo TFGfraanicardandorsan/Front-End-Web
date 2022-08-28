@@ -258,7 +258,7 @@ export function Inicio() {
                                     <Flex align="center">
                                         <HiCalendar />
                                         <Text fontSize="l" ml={1} p={1.5} mr={6}>
-                                            <strong>Fecha Asignada: {tarea.fechaHoraFinalizada == null ? 'No ha sido asignada una hora todavía' : tarea.fechaHoraAsignada.split("T")[0]
+                                            <strong>Fecha Asignada: {tarea.fechaHoraAsignada == null ? 'No ha sido asignada una hora todavía' : tarea.fechaHoraAsignada.split("T")[0]
                                                 + tarea.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + tarea.fechaHoraAsignada.split("T")[1].split(":")[1]}
                                             </strong>
                                         </Text>
@@ -334,7 +334,7 @@ export function Inicio() {
                                     <Flex align="center">
                                         <HiCalendar />
                                         <Text fontSize="l" ml={1} p={1.5} mr={6}>
-                                            <strong>Fecha Asignada: {item.fechaHoraFinalizada == null ? 'No ha sido asignada una hora todavía' : item.fechaHoraAsignada.split("T")[0]
+                                            <strong>Fecha Asignada: {item.fechaHoraAsignada == null ? 'No ha sido asignada una hora todavía' : item.fechaHoraAsignada.split("T")[0]
                                                 + item.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + item.fechaHoraAsignada.split("T")[1].split(":")[1]}
                                             </strong>
                                         </Text>

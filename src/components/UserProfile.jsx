@@ -42,6 +42,8 @@ const UserProfile = () => {
                     <div>
                         <p className="font-semibold text-xl dark:text-gray-200"> {usuarios.nombre} {usuarios.apellidos} </p>
                         <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {usuarios.email} </p>
+                        <p> Hora inicio: {usuarios.horaInicioTrabajar} </p>
+                        <p> Hora fin: {usuarios.horaFinTrabajar} </p>
                     </div>
                 </div>
                 <div className="mt-5">

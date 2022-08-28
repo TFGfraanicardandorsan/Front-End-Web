@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './App.css'
-import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Tareas } from './components/Tareas';
 import { CrearTarea } from './components/CrearTarea';
-import { Navbar, Footer, Sidebar } from './components';
+import { Footer, Sidebar } from './components';
 import CookieConsent from 'react-cookie-consent';
 import { UserContextProvider } from './contents/UserContext';
 import { useStateContext } from './contents/ContextProvider';
@@ -18,6 +18,7 @@ import { CrearInvitacion } from './components/CrearInvitacion';
 import { Inicio } from './components/Inicio';
 import { ActualizarPerfil } from './components/ActualizarPerfil'
 import { Presentacion } from './components/Presentacion';
+import { AsignacionTareas } from './components/AsignacionTareas';
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = window.sessionStorage.getItem('jwt');
@@ -35,13 +36,6 @@ export function App() {
       <div>
         <div className="flex relative dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
-            {/* <button
-              type="button"
-              onClick={() => setThemeSettings(true)}
-              style={{ background: 'black', borderRadius: '50%' }}
-              className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray">
-              <FiSettings />
-            </button> */}
           </div>
           {activeMenu ? (
             <div className='w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white'>
@@ -74,6 +68,7 @@ export function App() {
                 <Route path="/tareas" element={<ProtectedRoute> <Tareas /> </ProtectedRoute>} />
                 <Route path="/mistareas" element={<ProtectedRoute> <MisTareas /> </ProtectedRoute>} />
                 <Route path="/nuevaTarea" element={<ProtectedRoute><CrearTarea /></ProtectedRoute>} />
+                <Route path="/asignarTareas" element={<ProtectedRoute><AsignacionTareas /></ProtectedRoute>} />
 
                 {/* Equipos */}
                 <Route path="/equipos" element={<ProtectedRoute><Equipos /></ProtectedRoute>} />
