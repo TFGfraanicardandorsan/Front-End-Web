@@ -95,7 +95,7 @@ export function Registro() {
                     <FormControl isRequired >
                         <FormLabel> Email </FormLabel>
                         <Input borderColor='black' focusBorderColor='black' borderRadius={40} size='lg' placeholder='Email' bg='yellow.200'
-                            type="text"
+                            type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
