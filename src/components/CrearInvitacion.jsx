@@ -105,7 +105,7 @@ export function CrearInvitacion() {
             onChange={(e) => validateEmail(e)} />
           <span style={{
             fontWeight: 'bold',
-            color: 'red',
+            color: 'black',
           }}>{emailError}
           </span>
         </Box>
