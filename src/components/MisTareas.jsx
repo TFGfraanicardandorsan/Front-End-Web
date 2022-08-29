@@ -220,13 +220,13 @@ export function MisTareas() {
           </Box>
         ))}
       </section>
-      <div class="absolute bottom-0 ml-8" >
-        <div class="absolute inset-x-0 bottom-0 h-16 ">
+      <div className="absolute bottom-0 ml-8" >
+        <div className="absolute inset-x-0 bottom-0 h-16 ">
           <nav ml={4} aria-label="Page navigation example">
             <ul className="inline-flex -space-x-px">
               {pageNumbers.map(number => (
                 <li key={number}>
-                  <a onClick={() => paginate(number)} class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-black hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <a onClick={() => paginate(number)} className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-black hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                     {number}
                   </a>
                 </li>

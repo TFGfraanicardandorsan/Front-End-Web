@@ -259,7 +259,7 @@ export function Inicio() {
                                         <HiCalendar />
                                         <Text fontSize="l" ml={1} p={1.5} mr={6}>
                                             <strong>Fecha Asignada: {tarea.fechaHoraAsignada == null ? 'No ha sido asignada una hora todavía' : tarea.fechaHoraAsignada.split("T")[0]
-                                                + tarea.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + tarea.fechaHoraAsignada.split("T")[1].split(":")[1]}
+                                             +  ' ' + tarea.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + tarea.fechaHoraAsignada.split("T")[1].split(":")[1]}
                                             </strong>
                                         </Text>
                                         <Spacer />
@@ -277,7 +277,7 @@ export function Inicio() {
                             className=" bg-white rounded-2xl md:w-400 p-4 m-3"
                         >
                             <div className="flex justify-between items-center ">
-                                <p className="font-semibold text-black text-2xl">Tareas sin empezar: </p>
+                                <p className="font-semibold text-black text-2xl">Tareas sin empezar: {tareasSinEmpezar.length}  </p>
                             </div>
                             <div className="mt-4">
                                 <Progress colorScheme='yellow' height='32px' value={tareasSinEmpezar.length} min={0} max={tareasHoy.length} />
@@ -287,7 +287,7 @@ export function Inicio() {
                             className=" bg-white rounded-2xl md:w-400 p-4 m-3"
                         >
                             <div className="flex justify-between items-center ">
-                                <p className="font-semibold text-black text-2xl">Tareas en proceso: </p>
+                                <p className="font-semibold text-black text-2xl">Tareas en proceso: {tareasEnProceso.length} </p>
                             </div>
                             <div className="mt-4">
                                 <Progress colorScheme='yellow' height='32px' value={tareasEnProceso.length} min={0} max={tareasHoy.length} />
