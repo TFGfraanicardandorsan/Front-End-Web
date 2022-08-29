@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
-import {
-  Box, Flex, Text, Spacer, Heading, Button, Popover,PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,PopoverArrow,
+import { Box, Flex, Text, Spacer, Heading, Button, Popover,PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,PopoverArrow,
 PopoverCloseButton, Portal } from "@chakra-ui/react"
 import { RiUserSearchFill } from "react-icons/ri"
-import * as API from "../services/equipos";
-import * as APP from "../services/usuarios";
 import Navbar from './Navbar';
 
 
@@ -15,14 +12,42 @@ export function MisEquipos() {
   const [data, setData] = useState([]);
   const [managers, setManagers] = useState([]);
   const [asociados, setAsociados] = useState([])
-  const [usuario, setUsuario] = useState([]);
+  const [loading, setLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(4);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = equipos.slice(indexOfFirstPost, indexOfLastPost)
+  const paginate = pageNumber => setCurrentPage(pageNumber)
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(equipos.length / postsPerPage); i++) {
+    pageNumbers.push(i)
+  }
 
   useEffect(() => {
-    API.getMisEquipos().then(setEquipos);
-  }, []);
+    const fetchEquipos = async () => {
+      const jwt = window.sessionStorage.getItem('jwt');
+      const myHeader = new Headers({
+        "Authorization": `Bearer ${jwt}`
+      });
 
-  useEffect(() => {
-    APP.getMisDatos().then(setUsuario);
+      const myInit = {
+        method: 'GET',
+        headers: myHeader,
+        mode: 'cors',
+        cache: 'default'
+      };
+
+      const myRequest = new Request(`${API_URL}/misEquipos`, myInit);
+      setLoading(true);
+      await fetch(myRequest)
+        .then((response) => response.json()).then((json) => {
+          setEquipos(json);
+          setLoading(false)
+        })
+    }
+    fetchEquipos()
   }, [])
 
   async function getEncontrarCompaneros(equipoId) {
@@ -97,54 +122,6 @@ export function MisEquipos() {
     }
   }
 
-  async function ascenderManager(idEquipo, idUsuario) {
-    const jwt = window.sessionStorage.getItem('jwt');
-    const myHeader = new Headers({
-      "Authorization": `Bearer ${jwt}`
-    });
-
-    const myInit = {
-      method: 'GET',
-      headers: myHeader,
-      mode: 'cors',
-      cache: 'default'
-    };
-
-    const myRequest = new Request(`${API_URL}/equipo/` + idEquipo + '/volverManager/' + idUsuario, myInit);
-    try {
-      await fetch(myRequest)
-        .then((response) => response.json())
-        .then((json) => {
-          console.log(json);
-        });
-    } catch (error) {
-    }
-  }
-
-  async function descenderManager(idEquipo, idUsuario) {
-    const jwt = window.sessionStorage.getItem('jwt');
-    const myHeader = new Headers({
-      "Authorization": `Bearer ${jwt}`
-    });
-
-    const myInit = {
-      method: 'GET',
-      headers: myHeader,
-      mode: 'cors',
-      cache: 'default'
-    };
-
-    const myRequest = new Request(`${API_URL}/equipo/` + idEquipo + '/volveAsociado/' + idUsuario, myInit);
-    try {
-      await fetch(myRequest)
-        .then((response) => response.json())
-        .then((json) => {
-          console.log(json);
-        });
-    } catch (error) {
-    }
-  }
-
   return (
     <>
       <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
@@ -154,7 +131,7 @@ export function MisEquipos() {
         Mis Equipos
       </Heading>
       <section>
-        {equipos.map((equipo) => (
+        {currentPosts.map((equipo) => (
           < Box
             key={equipo.id}
             bg="yellow.200"
@@ -236,6 +213,21 @@ export function MisEquipos() {
           </Box>
         ))}
       </section>
+      <div className="absolute bottom-0 ml-8" >
+        <div className="absolute inset-x-0 bottom-0 h-16 ">
+          <nav ml={4} aria-label="Page navigation example">
+            <ul className="inline-flex -space-x-px">
+              {pageNumbers.map(number => (
+                <li key={number}>
+                  <a onClick={() => paginate(number)} className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-black hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    {number}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
     </>
   )
 }
