@@ -23,7 +23,7 @@ export function AdministrarEquipo() {
   const [usuario, setUsuario] = useState([]);
 
   useEffect(() => {
-    API.getEquiposAdministrados().then(setEquipos);
+    API.getEquiposCreador().then(setEquipos);
   }, []);
 
   useEffect(() => {

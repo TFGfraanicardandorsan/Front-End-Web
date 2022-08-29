@@ -50,3 +50,24 @@ export async function getEquiposAdministrados() {
         console.error(error);
     } 
 }
+
+export async function getEquiposCreador() {
+    const jwt = window.sessionStorage.getItem('jwt');
+    const myHeader = new Headers({
+        "Authorization": `Bearer ${jwt}`});
+
+    const myInit = {
+        method: 'GET',
+        headers: myHeader,
+        mode: 'cors',  
+        cache: 'default'
+    };
+
+    const myRequest = new Request(`${API_URL}/equiposCreados`, myInit);
+    try {
+        const response = await fetch(myRequest)
+        return await response.json();
+    } catch {
+        console.error(error);
+    } 
+}

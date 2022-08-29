@@ -277,7 +277,7 @@ export function Inicio() {
                             className=" bg-white rounded-2xl md:w-400 p-4 m-3"
                         >
                             <div className="flex justify-between items-center ">
-                                <p className="font-semibold text-black text-2xl">Tareas sin empezar: {tareasSinEmpezar.length}  </p>
+                                <p className="font-semibold text-black text-2xl">Tareas sin empezar Hoy: {tareasSinEmpezar.length}  </p>
                             </div>
                             <div className="mt-4">
                                 <Progress colorScheme='yellow' height='32px' value={tareasSinEmpezar.length} min={0} max={tareasHoy.length} />
@@ -287,7 +287,7 @@ export function Inicio() {
                             className=" bg-white rounded-2xl md:w-400 p-4 m-3"
                         >
                             <div className="flex justify-between items-center ">
-                                <p className="font-semibold text-black text-2xl">Tareas en proceso: {tareasEnProceso.length} </p>
+                                <p className="font-semibold text-black text-2xl">Tareas en proceso Hoy: {tareasEnProceso.length} </p>
                             </div>
                             <div className="mt-4">
                                 <Progress colorScheme='yellow' height='32px' value={tareasEnProceso.length} min={0} max={tareasHoy.length} />
@@ -359,12 +359,12 @@ export function Inicio() {
                     <div>
                         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl md:w-400 p-8 m-3 flex justify-center items-center gap-10">
                             <div>
-                                <p className="text-2xl font-semibold ">Tareas Terminadas</p>
+                                <p className="text-2xl font-semibold ">Tareas Terminadas Hoy</p>
 
                             </div>
                             <div className="w-40">
-                                <CircularProgress value={valor == null ? 0 : valor} color='orange.300' max={100} min={0} size='140px'>
-                                    <CircularProgressLabel> {valor == null ? "0" : valor} % </CircularProgressLabel>
+                                <CircularProgress value={valor * 0 != 0 ? 0 : valor } color='orange.300' max={100} min={0} size='140px'>
+                                    <CircularProgressLabel> {valor * 0 != 0 ? 0 : valor } % </CircularProgressLabel>
                                 </CircularProgress>
                             </div>
                         </div>

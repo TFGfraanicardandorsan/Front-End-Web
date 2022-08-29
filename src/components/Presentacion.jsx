@@ -2,21 +2,22 @@ import React from 'react'
 import Header from './Header'
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
+import { Link } from 'react-router-dom';
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { AnnotationIcon,UserGroupIcon, DocumentTextIcon, ClipboardListIcon } from '@heroicons/react/outline'
+import { AnnotationIcon, UserGroupIcon, DocumentTextIcon, ClipboardListIcon } from '@heroicons/react/outline'
 
 const features = [
     {
         name: 'Creación de tareas óptimas',
         description:
             'Gracias a nuestro algoritmo de asignación de tareas, la realización de las tareas se repartirán en función de la jornada laboral.',
-        icon:  DocumentTextIcon,
+        icon: DocumentTextIcon,
     },
     {
         name: 'Creación de equipos',
         description:
             'Prentendemos crear conexiones fluidas entre los miembros de los equipos.',
-        icon:  UserGroupIcon,
+        icon: UserGroupIcon,
     },
     {
         name: 'Gestión de las tareas',
@@ -95,7 +96,7 @@ export function Presentacion() {
                                         <div className="px-2 pt-2 pb-3 space-y-1">
                                         </div>
                                         <a
-                                            href="#"
+
                                             className="block w-full px-5 py-3 text-center font-medium text-yellow-200 bg-gray-50 hover:bg-gray-100"
                                         >
                                         </a>
@@ -133,11 +134,11 @@ export function Presentacion() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="lg:text-center">
                         <h2 className="text-lg text-yellow-200 font-semibold">T-Planifica</h2>
-                        <p className="mt-2 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl sm:tracking-tight">
-                           ¿Cuáles son nuestros objetivos?
-                        </p>
+                            <p className="mt-2 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl sm:tracking-tight">
+                                ¿Cuáles son nuestros objetivos?
+                            </p>
                         <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                           Para cumplir con las expectativas de nuestros clientes contamos con los siguientes servicios.
+                            Para cumplir con las expectativas de nuestros clientes contamos con los siguientes servicios.
                         </p>
                     </div>
 

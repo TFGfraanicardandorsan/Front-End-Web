@@ -20,6 +20,8 @@ import { ActualizarPerfil } from './components/ActualizarPerfil'
 import { Presentacion } from './components/Presentacion';
 import { AsignacionTareas } from './components/AsignacionTareas';
 import { AdministrarEquipo } from './components/AdministrarEquipo';
+import { Nosotros } from './components/Nosotros';
+import { Cookies } from './components/Cookies';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -60,10 +62,12 @@ export function App() {
                 Este sitio usa cookies. Puedes ver nuestra <a href='/privacy'> <strong><u>política de privacidad</u></strong></a> para más</CookieConsent>
 
               <Routes>
+                <Route path="/nosotros" element={<Nosotros />} />
+                <Route path="/cookies" element={<Cookies />} />
                 <Route path="/" element={<Presentacion />} />
-                <Route path="/inicio" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Registro />} />
+                <Route path="/inicio" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />
                 <Route path="/actualizarPerfil" element={<ProtectedRoute><ActualizarPerfil /></ProtectedRoute>} />
 
                 {/* Tareas */}
@@ -81,7 +85,7 @@ export function App() {
                 {/* Invitaciones */}
                 <Route path="/invitaciones" element={<ProtectedRoute><MisInvitaciones /></ProtectedRoute>} />
                 <Route path="/nuevainvitacion" element={<ProtectedRoute><CrearInvitacion /></ProtectedRoute>} />
-                
+
               </Routes>
             </div>
           </div>
