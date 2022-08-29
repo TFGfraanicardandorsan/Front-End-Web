@@ -31,8 +31,8 @@ export function Login() {
             <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
                 <Header />
             </div>
-            <Heading align="center" as="h1" size="2xl" m={4} >Login</Heading>
-            < Box bg="yellow.200" p={4} m={4} borderRadius="lg" >
+            <Heading p={4} align="center" as="h1" size="2xl" m={4} >Iniciar Sesión</Heading>
+            < Box bg="yellow.200" p={6} m={4} borderRadius="lg" >
                 {isLoginLoading && <strong>Comprobando credenciales ...</strong>}
                 {!isLoginLoading &&
                     <form onSubmit={handleSubmit}>

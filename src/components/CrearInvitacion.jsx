@@ -4,6 +4,7 @@ import {
   Box, Flex, Text, Spacer, Tag, Button, Heading, Image, Select, Input, FormControl, FormLabel, FormHelperText,
   FormErrorMessage
 } from "@chakra-ui/react"
+import validator from 'validator'
 import Navbar from './Navbar';
 import * as APP from '../services/equipos'
 import * as API from '../services/usuarios'
@@ -14,10 +15,18 @@ export function CrearInvitacion() {
   const [equipos, setEquipos] = useState([]);
   const [equipoId, setEquipoId] = useState('');
   const [usuarios, setUsuarios] = useState([]);
-  const [input, setInput] = useState('')
-  const handleInputChange = (e) => setInput(e.target.value)
-  const isError = input === ''
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('')
+  const validateEmail = (e) => {
+    var email = e.target.value
 
+    if (validator.isEmail(email)) {
+      setEmailError('Correo Electrónico válido')
+      setEmail(email)
+    } else {
+      setEmailError('Correo Electrónico incorrecto')
+    }
+  }
   useEffect(() => {
     APP.getEquiposAdministrados().then(setEquipos);
   }, [])
@@ -43,7 +52,6 @@ export function CrearInvitacion() {
     const myRequest = new Request(`${API_URL}/equipo/` + idEquipo + '/invite/' + email, myInit);
     try {
       const response = await fetch(myRequest)
-      //   getData();
       return await response.json();
     } catch (error) {
     }
@@ -58,7 +66,6 @@ export function CrearInvitacion() {
       <Heading align="center" as="h1" size="2xl" m={4} >
         Nueva Invitación
       </Heading>
-
 
       <section>
         < Box
@@ -83,31 +90,24 @@ export function CrearInvitacion() {
             </Select>
 
             <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
-              onClick={() => InvitarEquipo(equipoId, input)} >
+              onClick={() => InvitarEquipo(equipoId, email)} >
               <font size="6"><BsClipboardPlus /></font>
             </Button>
           </Flex>
           <br></br>
-          <FormControl isInvalid={isError}>
-            <FormLabel>
-              <Text fontSize="2xl">
-                <strong>Correo Electrónico :</strong>
-                <br></br>
-              </Text>
-            </FormLabel>
-            <Input
-              type='email'
-              value={input}
-              onChange={handleInputChange}
-            />
-            {!isError ? (
-              <FormHelperText>
-                Escriba el correo de la persona que quieras invitar
-              </FormHelperText>
-            ) : (
-              <FormErrorMessage>El correo electrónico es obligatorio</FormErrorMessage>
-            )}
-          </FormControl>
+          <FormLabel>
+            <Text fontSize="2xl">
+              <strong>Correo Electrónico :</strong>
+            </Text>
+          </FormLabel>
+          <Input borderColor='black' focusBorderColor='black' borderRadius={40}
+            size='lg' bg='yellow.200' type="email"
+            onChange={(e) => validateEmail(e)} />
+          <span style={{
+            fontWeight: 'bold',
+            color: 'red',
+          }}>{emailError}
+          </span>
         </Box>
       </section>
     </>
