@@ -335,7 +335,7 @@ export function Inicio() {
                                         <HiCalendar />
                                         <Text fontSize="l" ml={1} p={1.5} mr={6}>
                                             <strong>Fecha Asignada: {item.fechaHoraAsignada == null ? 'No ha sido asignada una hora todavía' : item.fechaHoraAsignada.split("T")[0]
-                                                + item.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + item.fechaHoraAsignada.split("T")[1].split(":")[1]}
+                                              + ' '  + item.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + item.fechaHoraAsignada.split("T")[1].split(":")[1]}
                                             </strong>
                                         </Text>
                                         <Spacer />
@@ -347,7 +347,7 @@ export function Inicio() {
                                 </Box>
                             ))}
                         </section>
-                        <div className="flex justify-between items-center mt-3 border-t-1 border-color">
+                        <div className="flex justify-between items-center mt-3 border-t-1  border-color">
                             <div className="mt-3">
                             </div>
                             <Button bg='yellow.200' p={4} ml={5} mr={6} top={2}
@@ -363,8 +363,8 @@ export function Inicio() {
 
                             </div>
                             <div className="w-40">
-                                <CircularProgress value={valor} color='orange.300' max={100} min={0} size='140px'>
-                                    <CircularProgressLabel> {valor}% </CircularProgressLabel>
+                                <CircularProgress value={valor == null ? 0 : valor} color='orange.300' max={100} min={0} size='140px'>
+                                    <CircularProgressLabel> {valor == null ? "0" : valor} % </CircularProgressLabel>
                                 </CircularProgress>
                             </div>
                         </div>
