@@ -22,6 +22,7 @@ import { AsignacionTareas } from './components/AsignacionTareas';
 import { AdministrarEquipo } from './components/AdministrarEquipo';
 import { Nosotros } from './components/Nosotros';
 import { Cookies } from './components/Cookies';
+import { Condiciones } from './components/Condiciones'
 
 
 const ProtectedRoute = ({ children }) => {
@@ -62,9 +63,10 @@ export function App() {
                 Este sitio usa cookies. Puedes ver nuestra <a href='/privacy'> <strong><u>política de privacidad</u></strong></a> para más</CookieConsent>
 
               <Routes>
+                <Route path="/" element={<Presentacion />} />
                 <Route path="/nosotros" element={<Nosotros />} />
                 <Route path="/cookies" element={<Cookies />} />
-                <Route path="/" element={<Presentacion />} />
+                <Route path="/condiciones" element={<Condiciones />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Registro />} />
                 <Route path="/inicio" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />

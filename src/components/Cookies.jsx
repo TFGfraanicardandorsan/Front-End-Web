@@ -1,17 +1,10 @@
 import { Heading, Box } from '@chakra-ui/react'
 import { MdCheckCircle } from 'react-icons/md';
 import Header from './Header'
-import {
-    List,
-    ListItem,
-    ListIcon,
-    OrderedList,
-    UnorderedList,
-} from '@chakra-ui/react'
+import { List, ListItem, ListIcon } from '@chakra-ui/react'
 
 export function Cookies() {
-
-
+    
     return (
         <>
             <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>

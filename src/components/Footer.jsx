@@ -17,7 +17,7 @@ const Footer = () => (
                         <ul className="text-gray-600 dark:text-gray-400">
                             <li className="mb-4">
                                 <Link to='/nosotros' >
-                                    <a href="#" className="hover:underline">¿Quiénes somos?</a>
+                                    <a className="hover:underline">¿Quiénes somos?</a>
                                 </Link>
                             </li>
                             <li className="mb-4">
@@ -34,7 +34,9 @@ const Footer = () => (
                                 </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:underline">Términos y Condiciones</a>
+                                <Link to='/condiciones' >
+                                    <a className="hover:underline">Términos y Condiciones</a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
