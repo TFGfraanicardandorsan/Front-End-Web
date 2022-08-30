@@ -28,7 +28,7 @@ export function Cookies() {
                     <List spacing={3}>
                         <ListItem>
                             <ListIcon as={MdCheckCircle} color='green.500' />
-                            Información que usted nos facilita: Recibimos y almacenamos toda la información que usted introduce en nuestra web o que nos facilita de cualquier otro modo. Puede elegir no facilitar cierta información, pero si así lo hace, no podrá disfrutar de muchas de las funciones que le ofrecemos. La información que usted nos facilita nos es útil para responder a sus peticiones, personalizar futuras clases que quiera solicita, mejorar nuestro servicio y ponernos en contacto con usted.
+                            Información que usted nos facilita: Recibimos y almacenamos toda la información que usted introduce en nuestra web o que nos facilita de cualquier otro modo. Puede elegir no facilitar cierta información, pero si así lo hace, no podrá disfrutar de muchas de las funciones que le ofrecemos. La información que usted nos facilita nos es útil para responder a sus peticiones, mejorar nuestro servicio y ponernos en contacto con usted.
                         </ListItem>
                         <ListItem>
                             <ListIcon as={MdCheckCircle} color='green.500' />
