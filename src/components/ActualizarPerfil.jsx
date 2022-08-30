@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Heading, FormControl, FormLabel, Input, Box, InputGroup, Button } from '@chakra-ui/react'
 import * as API from '../services/usuarios'
+import swal from 'sweetalert'
 import Navbar from './Navbar';
 
 export function ActualizarPerfil() {
@@ -14,6 +15,15 @@ export function ActualizarPerfil() {
     const [horaInicioTrabajar, setHoraInicioTrabajar] = useState('');
     const [horaFinTrabajar, setHoraFinTrabajar] = useState('');
 
+    const mostrarAlerta = () => {
+        swal ({
+            title: "Se ha actualizado el perfil satisfactoriamente",
+            icon: "success",
+            button: "Aceptar"
+        })
+    }
+
+
     useEffect(() => {
         API.getMisDatos().then(setUsuarios);
     }, []);
@@ -26,7 +36,7 @@ export function ActualizarPerfil() {
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${jwt}` },
             body: JSON.stringify({ id: usuarios.id, username, password, nombre, apellidos, email, horaInicioTrabajar, horaFinTrabajar })
         }).then(() => {
-            alert("Se ha actualizado el perfil correctamente")
+            mostrarAlerta()
         })
     }
 

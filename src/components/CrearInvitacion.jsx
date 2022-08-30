@@ -5,6 +5,7 @@ import {
   FormErrorMessage
 } from "@chakra-ui/react"
 import validator from 'validator'
+import swal from 'sweetalert'
 import Navbar from './Navbar';
 import * as APP from '../services/equipos'
 import * as API from '../services/usuarios'
@@ -35,6 +36,22 @@ export function CrearInvitacion() {
     API.getMisDatos().then(setUsuarios);
   }, [])
 
+    const mostrarAlerta = () => {
+        swal ({
+            title: "Se ha creado la invitación satisfactoriamente",
+            icon: "success",
+            button: "Aceptar"
+        })
+    }
+
+    const mostrarRechazo = () => {
+      swal ({
+          title: "Ya pertenece a este equipo",
+          icon: "error",
+          button: "Aceptar"
+      })
+  }
+
 
   async function InvitarEquipo(idEquipo, email) {
     const jwt = window.sessionStorage.getItem('jwt');
@@ -52,7 +69,7 @@ export function CrearInvitacion() {
     const myRequest = new Request(`${API_URL}/equipo/` + idEquipo + '/invite/' + email, myInit);
     try {
       const response = await fetch(myRequest)
-      alert((await response.text()).toString() == 'Ya pertenece a este equipo' ? "Ya pertenece a este equipo" : "Se ha enviado la invitación de forma satisfactoria")
+      addEventListener((await response.text()).toString() == 'Ya pertenece a este equipo' ?  mostrarRechazo() : mostrarAlerta() )
     } catch (error) {
     }
   }
