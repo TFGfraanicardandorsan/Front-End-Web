@@ -52,7 +52,7 @@ export function CrearInvitacion() {
     const myRequest = new Request(`${API_URL}/equipo/` + idEquipo + '/invite/' + email, myInit);
     try {
       const response = await fetch(myRequest)
-      return await response.json();
+      alert((await response.text()).toString() == 'Ya pertenece a este equipo' ? "Ya pertenece a este equipo" : "Se ha enviado la invitación de forma satisfactoria")
     } catch (error) {
     }
   }
