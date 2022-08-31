@@ -24,6 +24,7 @@ import { AdministrarEquipo } from './components/AdministrarEquipo';
 import { Nosotros } from './components/Nosotros';
 import { Cookies } from './components/Cookies';
 import { Condiciones } from './components/Condiciones'
+import { Error404 } from './components/Error404';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -91,6 +92,8 @@ export function App() {
                 {/* Invitaciones */}
                 <Route path="/invitaciones" element={<ProtectedRoute><MisInvitaciones /></ProtectedRoute>} />
                 <Route path="/nuevainvitacion" element={<ProtectedRoute><CrearInvitacion /></ProtectedRoute>} />
+
+                <Route path="*" element = {<Error404 />} />
 
               </Routes>
             </div>

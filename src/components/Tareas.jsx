@@ -48,7 +48,6 @@ export function Tareas() {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
-        // "Authorization": `Bearer ${token}` }
       }
     }).then(() => {
       console.log('Borrar tarea');

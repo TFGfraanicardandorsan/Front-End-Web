@@ -150,10 +150,12 @@ export function AsignacionTareas() {
             borderRadius="lg"
           >
             <Flex>
-              <Text fontSize="xl">
+              <Text fontSize="lg">
                 <strong>Nombre</strong> :  {tarea.nombre}
                 <br></br>
                 <strong>Descripción</strong> : {tarea.descripcion}
+               <br></br>
+                <strong>Duración: {tarea.duracion}</strong>
               </Text>
               <Spacer />
 
