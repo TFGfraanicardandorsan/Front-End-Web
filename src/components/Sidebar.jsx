@@ -135,7 +135,7 @@ const Sidebar = () => {
                         </Flex>
                         <Flex align='center' fontSize={15}>
                             <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}>
-                                <GoTasklist />
+                                <RiTeamLine />
                                 <Link to="/nuevoEquipo">
                                     <Text fontSize="xl" ml={2} mr={3}>
                                         <strong>Crear Equipos</strong>
@@ -146,39 +146,6 @@ const Sidebar = () => {
                     </Box>
                     <Box bg='white' w='95%' p={1} color='black'>
                     </Box>
-                    <Box bg='yellow.200' w='95%' p={1} color='black' borderRadius={20}>
-                        <Flex align='center' fontSize={15}>
-                            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}>
-                                <RiTeamLine />
-                                {isLogged
-                                    ? <Link to='#' onClick={logout}>
-                                        <Text fontSize="xl" ml={2} mr={3}>
-                                            <strong>Cerrar Sesión</strong>
-                                        </Text>
-                                    </Link>
-                                    :
-                                    <Link to="/login">
-                                        <Text fontSize="xl" ml={2} mr={3}>
-                                            <strong>Iniciar Sesión</strong>
-                                        </Text>
-                                    </Link>}
-                            </Button>
-                        </Flex>
-                    </Box>
-                    <Box bg='white' w='95%' p={1} color='black'>
-                    </Box>
-                    {/* <Box bg='yellow.200' w='95%' p={1} color='black' borderRadius={20}>
-                        <Flex align='center' fontSize={15}>
-                            <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}>
-                                <GoTasklist />
-                                <Link to="/register">
-                                    <Text fontSize="xl" ml={2} mr={3}>
-                                        <strong>Registrarse</strong>
-                                    </Text>
-                                </Link>
-                            </Button>
-                        </Flex>
-                    </Box> */}
                 </div>
             </>)}
         </div>
