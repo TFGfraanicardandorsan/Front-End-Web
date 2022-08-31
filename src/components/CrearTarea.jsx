@@ -97,7 +97,7 @@ export function CrearTarea() {
                     <br></br>
                     <FormControl isRequired >
                         <FormLabel> Duración </FormLabel>
-                        <NumberInput maxW='100px' min={1} max={100} mr='2rem' borderColor='black' focusBorderColor='black' bg='yellow.200'
+                        <NumberInput maxW='100px' min={1} max={12} mr='2rem' borderColor='black' focusBorderColor='black' bg='yellow.200'
                             value={duracion} onChange={(duracion) => setDuracion(duracion)}>
                             <NumberInputField />
                             <NumberInputStepper>
@@ -106,7 +106,7 @@ export function CrearTarea() {
                             </NumberInputStepper>
                         </NumberInput>
                         <Slider
-                            min={1} max={100}
+                            min={1} max={12}
                             flex='1'
                             focusThumbOnChange={false}
                             value={duracion}

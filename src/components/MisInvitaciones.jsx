@@ -122,12 +122,14 @@ export function MisInvitaciones() {
 
               <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
                 onClick={() => AceptarInvitacion(invitacion.id)} >
-                <font size="6"><BsJournalCheck /></font>
+                <font size="5"><BsJournalCheck /></font>
+                <p> Aceptar invitación </p>
               </Button>
 
               <Button colorScheme='transparent' textColor='black' p={4} ml={5} mr={6} top={1}
                 onClick={() => RechazarInvitación(invitacion.id)} >
-                <font size="6"> <HiOutlineX /></font>
+                <font size="5"> <HiOutlineX /></font>
+                <p> Rechazar invitación </p>
               </Button>
             </Flex>
             

@@ -92,8 +92,6 @@ const Notificaciones = () => {
               <p className="font-semibold text-l dark:text-gray-200"> Mensaje: {notificacion.mensaje} </p>
               <p className="font-semibold text-l dark:text-gray-200"> Estado: {notificacion.estadoNotificacion} </p>
               <p className="text-gray-500 text-sm font-semibold dark:text-gray-400" > Tipo: {notificacion.tipoNotificacion} </p>
-              <p className="text-gray-500 text-sm font-semibold dark:text-gray-400" onClick={() => (tareaId(notificacion.referencia))}> <u>Ver Tarea</u>: {data.nombre}</p>
-
               <div className="flex space-x-2 justify-center">
                 <button onClick={() => ocultarNotificacion(notificacion.id)}
                   type="button" className="px-6 py-2.5  text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-white-600 hover:shadow-lg focus:bg-black-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-black active:shadow-lg transition duration-150 ease-in-out flex items-center">
