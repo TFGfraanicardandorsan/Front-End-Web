@@ -21,7 +21,7 @@ const Footer = () => (
                                 </Link>
                             </li>
                             <li className="mb-4">
-                                <a href="mailto:a@gmail.com" className="hover:underline">Contacto</a>
+                                <a href="mailto:tplanifica.sa@gmail.com" className="hover:underline">Contacto</a>
                             </li>
                         </ul>
                     </div>
@@ -30,7 +30,7 @@ const Footer = () => (
                         <ul className="text-gray-600 dark:text-gray-400">
                             <li className="mb-4">
                                 <Link to='/cookies' >
-                                    <a href="#" className="hover:underline ">Cookies</a>
+                                    <a className="hover:underline ">Cookies</a>
                                 </Link>
                             </li>
                             <li>
@@ -52,7 +52,7 @@ const Footer = () => (
             </div>
             <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
             <div className="sm:flex sm:items-center sm:justify-center">
-                <span className="text-xl text-black sm:text-center dark:text-black">© 2022 <a href="#" className="hover:underline">T-Planifica</a>.
+                <span className="text-xl text-black sm:text-center dark:text-black">© 2022 <a href="/" className="hover:underline">T-Planifica</a>.
                 </span>
             </div>
         </footer>

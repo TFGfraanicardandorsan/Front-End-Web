@@ -1,4 +1,4 @@
-import { Heading, FormControl, FormLabel, Input, Box, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
 import Header from './Header'
 
 export function Nosotros() {
@@ -19,7 +19,7 @@ export function Nosotros() {
                     Informática. Universidad de Sevilla. Avenida Reina Mercedes S/N. C.P. 41012 - Sevilla,10
                     Sevilla.
                     <br></br>
-                    Para solicitar más información nos dudes en contactarnos a través del siguiente correo: 
+                    Para solicitar más información nos dudes en contactarnos a través del siguiente correo:  <a href="mailto:tplanifica.sa@gmail.com" className="hover:underline">tplanifica.sa@gmail.com</a>
                     </font> </h1>
             </Box>
         </>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Flex, Text, Spacer, Tag, Button, Select, CircularProgress, CircularProgressLabel, Progress } from "@chakra-ui/react";
-import { HiCalendar, HiClock } from "react-icons/hi";
+import { HiCalendar } from "react-icons/hi";
 import { RiNotification3Line } from 'react-icons/ri';
 import { BsChatLeft } from 'react-icons/bs';
 import Navbar from './Navbar';

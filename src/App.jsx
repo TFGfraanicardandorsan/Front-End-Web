@@ -60,7 +60,7 @@ export function App() {
                 // debug={true}
                 buttonText="Acepto"
               >
-                Este sitio usa cookies. Puedes ver nuestra <a href='/privacy'> <strong><u>política de privacidad</u></strong></a> para más</CookieConsent>
+                Este sitio usa cookies. Puedes ver nuestra <a href='/cookies'> <strong><u>política de privacidad</u></strong></a> para más información.</CookieConsent>
 
               <Routes>
                 <Route path="/" element={<Presentacion />} />
