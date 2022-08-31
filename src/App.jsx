@@ -93,7 +93,7 @@ export function App() {
                 <Route path="/invitaciones" element={<ProtectedRoute><MisInvitaciones /></ProtectedRoute>} />
                 <Route path="/nuevainvitacion" element={<ProtectedRoute><CrearInvitacion /></ProtectedRoute>} />
 
-                <Route path="*" element = {<Navigate to="/"/>} />
+                <Route path="*" element = {<Error404 />} />
 
               </Routes>
             </div>
