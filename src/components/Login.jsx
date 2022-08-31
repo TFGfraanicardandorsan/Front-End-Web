@@ -3,7 +3,7 @@ import { Heading, FormControl, FormLabel, Input, Box, Button, InputGroup, InputR
 import { useNavigate } from 'react-router-dom'
 import { IoEyeSharp } from 'react-icons/io5'
 import { FaEyeSlash } from 'react-icons/fa'
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import  Header  from './Header'
 import useUser from '../hooks/useUser'
 

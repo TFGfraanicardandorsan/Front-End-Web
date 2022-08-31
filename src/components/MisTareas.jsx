@@ -4,7 +4,6 @@ import { MdOutlineNotStarted } from "react-icons/md"
 import { AiOutlineFileDone } from "react-icons/ai"
 import { Box, Flex, Text, Spacer, Tag, Button, Heading } from "@chakra-ui/react"
 import Navbar from './Navbar';
-import * as API from "../services/tareas";
 
 export function MisTareas() {
 
@@ -144,7 +143,7 @@ export function MisTareas() {
       </div>
 
       <Heading align="center" as="h1" size="2xl" m={4} >
-        Mis Tareas
+        Mis Tareas asignadas
       </Heading>
 
       <section>
