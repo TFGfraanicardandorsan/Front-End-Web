@@ -190,7 +190,6 @@ export function Inicio() {
         }
     }
 
-
     return (
         <>
             <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
@@ -259,13 +258,15 @@ export function Inicio() {
                                         <HiCalendar />
                                         <Text fontSize="l" ml={1} p={1.5} mr={6}>
                                             <strong>Fecha Asignada: {tarea.fechaHoraAsignada == null ? 'No ha sido asignada una hora todavía' : tarea.fechaHoraAsignada.split("T")[0]
-                                             +  ' ' + tarea.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + tarea.fechaHoraAsignada.split("T")[1].split(":")[1]}
+                                                + ' ' + tarea.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + tarea.fechaHoraAsignada.split("T")[1].split(":")[1]}
                                             </strong>
                                         </Text>
                                         <Spacer />
+
+
                                         <Text mr={1} ><strong>Prioridad:</strong></Text>
-                                        <Tag p={2} ml={6} mr={8} colorScheme="red"  >
-                                            <text>{tarea.priorizacion}</text>
+                                        <Tag p={2} ml={6} mr={8} colorScheme={tarea.priorizacion == 1 ? "red" : "blue"}  >
+                                            <text> {tarea.priorizacion == 1 ? tarea.priorizacion : tarea.priorizacion}</text>
                                         </Tag>
                                     </Flex>
                                 </Box>
@@ -335,13 +336,13 @@ export function Inicio() {
                                         <HiCalendar />
                                         <Text fontSize="l" ml={1} p={1.5} mr={6}>
                                             <strong>Fecha Asignada: {item.fechaHoraAsignada == null ? 'No ha sido asignada una hora todavía' : item.fechaHoraAsignada.split("T")[0]
-                                              + ' '  + item.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + item.fechaHoraAsignada.split("T")[1].split(":")[1]}
+                                                + ' ' + item.fechaHoraAsignada.split("T")[1].split(":")[0] + ":" + item.fechaHoraAsignada.split("T")[1].split(":")[1]}
                                             </strong>
                                         </Text>
                                         <Spacer />
                                         <Text mr={1} ><strong>Prioridad:</strong></Text>
-                                        <Tag p={2} ml={6} mr={8} colorScheme="red"  >
-                                            <text>{item.priorizacion}</text>
+                                        <Tag p={2} ml={6} mr={8} colorScheme={item.priorizacion == 1 ? "red" : "blue"}  >
+                                            <text> {item.priorizacion == 1 ? item.priorizacion : item.priorizacion}</text>
                                         </Tag>
                                     </Flex>
                                 </Box>
@@ -363,8 +364,8 @@ export function Inicio() {
 
                             </div>
                             <div className="w-40">
-                                <CircularProgress value={valor * 0 != 0 ? 0 : valor } color='orange.300' max={100} min={0} size='140px'>
-                                    <CircularProgressLabel> {valor * 0 != 0 ? 0 : valor } % </CircularProgressLabel>
+                                <CircularProgress value={valor * 0 != 0 ? 0 : valor} color='orange.300' max={100} min={0} size='140px'>
+                                    <CircularProgressLabel> {valor * 0 != 0 ? 0 : valor} % </CircularProgressLabel>
                                 </CircularProgress>
                             </div>
                         </div>
@@ -399,10 +400,9 @@ export function Inicio() {
                                 ))}
                             </Select>
                         </div>
-                        {/* {datos.map((hola) => ( */}
                         < Box
                             bg="yellow.200"
-                            // key = {hola.id}
+
                             p={4}
                             m={4}
                             borderRadius="lg"
@@ -411,15 +411,10 @@ export function Inicio() {
                                 <Text fontSize="l">
                                     <strong>Equipo</strong> :  {datos.nombre}
                                     <br></br>
-                                    {/* <strong>Creador</strong> : {datos.creador.nombre} {datos.creador.apellidos}
-                                        <br></br>
-                                        <strong>Hora de Inicio de Trabajo</strong> : {datos.creador.horaInicioTrabajar}
-                                        <br></br>
-                                        <strong>Hora de Finalización de Trabajo</strong> : {datos.creador.horaFinTrabajar}  */}
                                 </Text>
                             </Flex>
                         </Box>
-                        {/* ))} */}
+
                         <div className="flex justify-between items-center mt-3 border-t-1 border-color">
                             <div className="mt-3">
                             </div>
