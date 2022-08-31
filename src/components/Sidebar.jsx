@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png';
 import { MdOutlineCancel } from 'react-icons/md'
 import { Box, Text, Flex, Button, Image } from '@chakra-ui/react'
 import { FaTasks } from 'react-icons/fa'
@@ -35,7 +36,7 @@ const Sidebar = () => {
                         <Image
                             boxSize='120px'
                             align='center'
-                            src="../src/assets/logo.png"
+                            src={logo}
                             alt='logo'
                         />
                     </Link>

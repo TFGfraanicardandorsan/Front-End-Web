@@ -1,8 +1,8 @@
 import React from 'react'
 import Header from './Header'
 import { Fragment } from 'react'
+import logo from '../assets/dashboard.png';
 import { Popover, Transition } from '@headlessui/react'
-import { Link } from 'react-router-dom';
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { AnnotationIcon, UserGroupIcon, DocumentTextIcon, ClipboardListIcon } from '@heroicons/react/outline'
 
@@ -123,7 +123,7 @@ export function Presentacion() {
                 <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
                     <img
                         className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-                        src="src\assets\dashboard.png"
+                        src={logo}
                         alt="Imagen inicio"
                     />
                 </div>

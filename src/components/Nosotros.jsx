@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/react'
+import { Heading, Box } from '@chakra-ui/react'
 import Header from './Header'
 
 export function Nosotros() {
