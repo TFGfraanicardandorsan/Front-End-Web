@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Tareas } from './components/Tareas';
 import { CrearTarea } from './components/CrearTarea';
 import { Footer, Sidebar } from './components';
@@ -60,7 +61,10 @@ export function App() {
                 // debug={true}
                 buttonText="Acepto"
               >
-                Este sitio usa cookies. Puedes ver nuestra <a href='/cookies'> <strong><u>política de privacidad</u></strong></a> para más información.</CookieConsent>
+                Este sitio usa cookies. Puedes ver nuestra  
+                <Link to='/cookies' >
+                  <a className="hover:underline "> <strong><u>política de privacidad</u></strong></a>
+                </Link> para más información.</CookieConsent>
 
               <Routes>
                 <Route path="/" element={<Presentacion />} />
